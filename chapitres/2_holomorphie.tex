@@ -228,13 +228,13 @@ montrant que $x^*$ est un point fixe de $f$. L'unicité s'obtient facilement en 
 ce qui est impossible car $k < 1$.
 \end{proof}
 \begin{rem}
-Le théorème du point fixe est remarquable sur deux points: 
+Le théorème du point fixe présente deux aspects remarquables: 
 \begin{itemize}
 \item La convergence a lieu indépendamment du point de départ. 
 \item La suite d'approximation du point fixe donne un algorithme explicite de calcul.
 \end{itemize}
 \end{rem}
-On peut maintenant revenir à la preuve du théorème d'inversion locale qui sera elle aussi constructive.
+On peut maintenant revenir à la preuve du théorème d'inversion locale qui sera, elle aussi, constructive.
 \begin{proof}
 L'idée principale est d'utiliser pour l'inversion le modèle linéaire fourni par la différentielle en $x_0$ en lieu et place de l'application $f$. 
 Soit $V$ un voisinage de $x_0$ dans lequel l'application $f$ vérifie la condition de stricte différentiabilité:
@@ -300,12 +300,13 @@ dans $o_{f(x_0)}(\|z-y\|)$, $f^{-1}$ étant lipschitzienne. On en déduit la str
 % Le théorème d'inversion locale est vrai dans le cadre beaucoup plus général des espaces de Banach.
 % \end{rem}
 
-La proposition suivante permet d'utiliser le théorème d'inversion locale dans le cadre des applications de classe $C^1(\Omega)$, qui sont plus aisées à caractériser.
+La proposition suivante permet d'utiliser le théorème d'inversion locale dans le cadre des applications de classe $C^1(U)$,
+ $U$ ouvert, qui sont plus aisées à caractériser.
 \begin{fprop}
-Une application de classe $C^1(\Omega)$ est strictement différentiable en tout point de $\Omega$.
+Une application de classe $C^1(U)$ est strictement différentiable en tout point de $U$.
 \end{fprop}
 \begin{proof}
-Soit $x_0\in \Omega$ et soit $\epsilon > 0$. Par continuité de $f^\prime$, il existe un voisinage $V_\epsilon$ de 
+Soit $x_0\in U$ et soit $\epsilon > 0$. Par continuité de $f^\prime$, il existe un voisinage $V_\epsilon$ de 
 $x_0$ tel que pour tout $y$ dans $V_\epsilon$:
 \[
 \left\| f^{\prime}(y)-f^\prime(x_0) \right\| \leq \frac{\epsilon}{2} 
@@ -315,24 +316,17 @@ Pour tout couple de points $(y,z)$ de $V_\epsilon$:
 f(z)-f(y)-f^\prime(x_0)(z-y) & = \left(f(z)-f(y)-f^\prime(y)(z-y) \right)  \\
 & + \left(f^\prime(y)-f^\prime(x_0)\right)(z-y)
 \end{align*}
-Le premier terme du membre de droite est dans $o(\|z-y\|)$ en vertu de la différentiabilité de $f$ et quitte à réduire $V_\epsilon$, on peut supposer dans perte de généralité qu'il est majoré par $\epsilon \|z-y\| /2$. Le second terme est majoré par la même quantité, on a donc:
+Le premier terme du membre de droite est dans $o(\|z-y\|)$ en vertu de la différentiabilité de $f$ et quitte à réduire $V_\epsilon$, 
+on peut supposer dans perte de généralité qu'il est majoré par $\epsilon \|z-y\| /2$. 
+Le second terme est majoré par la même quantité, on a donc:
 \[
 \left\|f(z)-f(y)-f^\prime(x_0)(z-y)\right \| \leq  \epsilon \|z-y\|
 \]
 montrant la stricte différentiabilité de $f$ en $x_0$.
 \end{proof}
-La proposition précédente est locale: on peut supposer la différentiabilité au voisinage de $x_0$ et la continuité de $f^\prime$ en ce point pour assurer la strict différentiabilité en $x_0$.
+La proposition précédente est locale: on peut supposer la différentiabilité au voisinage de $x_0$ et la 
+continuité de $f^\prime$ en ce point pour assurer la strict différentiabilité en $x_0$.
 
-
-Pour une preuve détaillée de ce théorème important, appelé théorème d'inversion locale, voir par exemple \cite{cartan1977, pham1996}.
- Une forme plus globale du théorème d'inversion est donnée par le corollaire suivant:
-
-\begin{cor} Pour que $f \colon U \to \R^2$, soit un $C^1$-difféomorphisme de $U$ sur un ouvert de $\R^2$, il faut et il suffit que :
-\begin{MYenumerate}
-\item $f$ soit une injection ;
-\item $f^\prime(x)$ soit un isomorphisme pour tout point $x \in U$.
-\end{MYenumerate}
-\end{cor}
 
 
 \subsection{Calcul différentiel en coordonnées cartésiennes}
@@ -383,15 +377,13 @@ La proposition suivante est souvent utilisée pour prouver la différentiabilit�
 \end{fprop}
 
 \begin{fprop}
-Soit $f \colon \Omega \to \R^2$. Si les dérivées partielles de $f$ existent et sont continues, alors $f$ est de classe $C^1(\Omega)$.
+Soit $f \colon U \to \R^2$. Si les dérivées partielles de $f$ existent et sont continues, alors $f$ est de classe $C^1(U)$.
 \end{fprop}
 
 
 Toutes ces notions et notations s'étendent immédiatement aux fonctions $f \colon U \subset \R^n \to \R^m$. 
 % Pour plus de détails, la définition des dérivées secondes et successives et le théorème des fonctions implicites, 
 % le lecteur est prié de se reporter à \cite{cartan1977} par exemple. 
-
-
 
 \section{Holomorphie}
 \begin{fdefn}
