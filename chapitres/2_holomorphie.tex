@@ -406,7 +406,7 @@ La fonction puissance $f(z)=z^m$ a pour dérivée en tout point $z$, la fonction
 \begin{exem}
  La fonction $f(z)=\overline{z}$ n'est dérivable en aucun point $z$. En effet, pour $h \in \C$,
 \[\frac{f(z + h) - f(z)}{h}= \frac{\overline{h}}{h}.\]
-Si $h$ est réel alors le quotient vaut $1$, alors que si $h$ est imaginaire le quotient vaut $-1$ ; par conséquent ce quotient n'admet pas de limite quand $h \rightarrow 0$. 
+Si $h$ est réel, le quotient vaut $1$, alors que si $h$ est imaginaire, le quotient vaut $-1$ ; par conséquent ce quotient n'admet pas de limite quand $h \rightarrow 0$. 
 \end{exem}
 
 La définition de l'holomorphie signifie que la fonction $f(z)$ est tangente en $z_0$ à l' application $\C$-affine:
@@ -416,9 +416,13 @@ La définition de l'holomorphie signifie que la fonction $f(z)$ est tangente en 
 \end{equation} 
 $g_{z_0}$ s'écrit comme une composition:
 \begin{equation}
-  g = T_{z_0}\circ H_{f^\prime(z0)} \circ T_{-z_0}
+  g = T_{f(z_0)}\circ H_{f^\prime(z0)} \circ T_{z_0}^{-1}
 \end{equation} 
-où, pour $a \in \C$,  $T_a$ désigne la translation par $a$ et $H_a$ l'application $\C$-linéaire $z \mapsto H_a(z) = az.$
+où, pour $a \in \C$,  $T_a$ désigne la translation par $a$ et $H_a$ l'application $\C$-linéaire $z \mapsto H_a(z) = az.$ Cette dernière 
+transformation est elle-même la composée d'une homothétie de rapport $\lvert a \rvert$ et d'une rotation de centre $0$ et d'angle $\theta$ 
+si $a=\lvert a \rvert e^{i \theta} .$ 
+On en déduit que $g_{z_0}$ conserve les angles et multiplie les longueurs par un facteur $\lvert a \rvert.$
+La même propriété est vérifié en $z_0$ par $f$ au sens suivant:
 
 
 En particulier, l'angle de deux vecteurs attachés au point $z_0$ est conservé par une transformation holomorphe ainsi que le rapport
