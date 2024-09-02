@@ -1,0 +1,147 @@
+\section{Changement de variable}
+
+La formule du changement de variable par les $C^1$-difféomorphismes 
+dans $\mathbb{R}^n$ est d'une grande importance tant pratique que
+théorique. 
+Elle est essentiellement basée sur un calcul de
+changement de volume pour des cubes élémentaires, puis l'utilisation
+du théorème des classes monotones pour passer à des Boréliens
+quelconques.
+Dans la suite on supposera toujours que l'on travaille dans
+$\mathbb{R}^n$ muni de sa topologie usuelle.
+\begin{prop}
+Soit $f \mathbb{R}^n \to \mathbb{R}^n$ une application linéaire $f : x
+\to M x$ avec $M$ matrice $n \times n$ inversible. Pour tout borélien
+$B$, on a~:
+\[ 
+\lambda(f(B)) = |det(M)| \lambda(B)
+\]
+\end{prop}
+On remarquera que l'application $B \to \lambda(f(B))$ est la mesure
+image de $\lambda$ par $f^{-1}$.
+\begin{proof}
+Soit $B$ un borélien. Pour tout $x \in \mathbb{R}^n$, on a~:
+\[
+\lambda(f(B + x)) = \lambda(f(B) + f(x)) = \lambda(f(x))
+\]
+On en déduit que la mesure image de $\lambda$ par $f^{-1}$ est
+invariante par translation, donc égale, à une constante multiplicative
+près, à la mesure de Lebesgue~:
+\[
+\exists C >0 \, | \, \forall B \in \mathcal{B}(\mathbb{R}^n), \, \mu(f(B)) = C \mu(B)
+\]
+Supposons dans un premier temps $M$ orthogonale. La boule unité est
+laissée invariante par $f$, d'où $C = 1 = |det(M)|$ dans ce cas. Supposons
+maintenant que $M$ est diagonale, à coefficients diagonaux $\sigma_i,
+i=1\dots n$ positifs. L'image de $[0,1]^n$ est $\prod_{i=1\dots n}
+[0, \sigma_i]$ on en déduit $C = \prod_{i=1\dots n} \sigma_i =
+|det(M)|$. Dans le cas général, on applique les deux résultats
+précédents à la décomposition en valeurs singulières $M = U \Sigma
+V^t$ de $M$.
+\end{proof}
+\begin{defn}
+Une application inversible $f : \mathbb{R}^n \to \mathbb{R}^n$ est
+appelée $C^k$-difféomorphisme si elle est de classe $C^k$ ainsi que
+son inverse.
+\end{defn}
+\begin{term}
+Soit $f$ une application différentiable . L'application
+jacobienne (ou Jacobien) est l'application $J_f : x \to det(f^\prime(x))$. 
+\end{term}
+\begin{prop}
+Soit $U,V$ deux ouverts de $\mathbb{R}^n$ et $K$ un compact de $U$. Soit $f : U \to V$ un
+$C^1$-difféomorphisme. Pour tout $\epsilon > 0$, il existe $\delta >
+0$ tel que pour tout cube $C$ de centre $x_0 \in K$ dont la longueur du
+côté est inférieure à $\delta$~:
+\[
+(1-\epsilon)^n |J_f(x_0)| \lambda(C) \leq \lambda(f(C)) \leq (1+\epsilon)^n
+|J_f(x_0)| \lambda(C)
+\]
+\end{prop}
+\begin{proof}
+Par hypothèse, $f^\prime$ est continue, il existe donc $\delta > 0$
+tel que~:
+\[
+\| x - x_0 \| < \delta \rightarrow \| f^\prime(x) - f^\prime(x_0) \| < \epsilon
+\]
+On peut choisir $\delta$ suffisamment petit pour que  $C \subset K$
+et que la propriété ci-dessus soit vraie. 
+Pour tout $x \in C$, il existe $c \in C$ tel que $f(x) - f(x_0) =
+f^\prime(c) (x-x_0)$. En combinant ce résultat avec le précédent, on
+en déduit~:
+\[
+\| f(x) - f(x_0) - f^\prime(x_0)(x-x_0)\| \leq \epsilon \|x-x_0\|
+\]
+Soit l'application affine~:
+\[
+T : x \to f(x_0)+f^\prime(x_0)(x-x_0)
+\]
+On peut écrire, pour $x \in C$~:
+\[
+f(x) = T(x + T^{-1}g(x,x_0))
+\]
+avec $\| g(x,x_0) \| \leq \epsilon \|x -x_0\|$.
+En posant~:
+\[
+\eta = \sup \{ \| f^{\prime}(x)^{-1} \|, x \in K \}
+\]
+il vient~:
+\[
+\|  T^{-1}g(x,x_0) \| \leq \eta \epsilon \| x - x_0 \|
+\]
+et donc~:
+\[
+\lambda(f(C)) \leq \lambda(T((1+\eta \epsilon )C)) =
+(1+\eta\epsilon)^n |J_f(x_0)| \lambda(C)
+\]
+On montrerait de même la minoration.
+\end{proof}
+\begin{defn}
+Un cube élémentaire d'ordre $k \geq 1$ est un cube de la forme~:
+\[
+C = \prod_{i=1}^n [ x_i 2^{-k}, (x_i + 1)2^{-k} ]
+\]
+où les $x_i, i=1\dots n$ sont des entiers.
+\end{defn}
+En recouvrant un cube élémentaire $C$ d'ordre $k$ quelconque par des
+cubes vérifiant les hypothèses de la proposition précédente pour
+$\epsilon > 0$ donné, on obtient (exercice)~:
+\[
+(1-\epsilon)^2 \int_{C} |J_f(x)|d \lambda(x) \leq \lambda(f(C)) \leq
+(1+\epsilon)^2 \int_{C} |J_f(x)| d \lambda(x)
+\]
+puis l'égalité par passage à la limite. 
+\begin{prop} Changement de variable
+Soient $U,V$ ouverts de $\mathbb{R}^n$. Soit $f : U \to V$ un
+$C^1$-difféomorphisme. On a, pour tout borélien $B$~:
+\[
+\lambda(f(B)) = \int_B |J_f(x) |d \lambda(x)
+\]
+\end{prop}
+\begin{proof}
+Les cubes élémentaires d'adhérence incluse dans $U$ forment une
+classe monotone $\mathcal{C}$. La mesure  $\lambda(f(C))$ d'un cube
+$C$ de cette classe est égale à $ \int_C |J_f(x) |d \lambda(x)$. Le
+résultat se déduit du théorème des classes monotones en remarquant que
+$\mathcal{C}$ est stable par intersections finies et engendre la tribu
+de Borel.
+\end{proof}
+\begin{rem}
+ L'extension de la proposition au cas des $C^1$-difféo\-morphismes par
+morceaux se fait immédiatement en l'appliquant sur une partition de
+$U$.
+\end{rem}
+\begin{prop}
+Sous les hypothèses précédentes, on a, pour toute application $g : V
+\to \mathbb{R}^+$~:
+\[
+\int_V f(x) d \lambda(x) = \int_U g(f(x)) |J_f(x)| d \lambda(x)
+\]
+\end{prop}
+\begin{rem}
+La proposition est une conséquence immédiate du résultat sur la mesure
+image. Pour une application $g$de signe quelconque, on utilisera souvent
+la formule ci-dessus sur $|g|$ pour montrer la sommabilité, puis à
+nouveau sur $g$ pour calculer l'intégrale (en toute rigueur pour
+$g^+,g^-$, mais un calcul élémentaire montrer que cela revient au même).
+\end{rem}

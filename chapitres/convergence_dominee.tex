@@ -1,0 +1,504 @@
+\chapter{Convergence dominée}
+La puissance de la théorie de l'intégration de Lebesgue réside dans
+les théorèmes de convergence que l'on peut en déduire. Historiquement,
+la première théorie de l'intégration formalisée est celle de Riemann qui a été
+présentée en introduction. Son défaut principal est la nécessité d'avoir
+ la convergence uniforme pour intervertir limite et intégrale. Dans le cadre de
+ la théorie de Lebesgue, la convergence simple suffit, en ajoutant, dans le cas
+ d'applications de signe quelconque, une hypothèse aisée à vérifier. Une conséquence
+importante des théorèmes qui vont être maintenant établis sera l'existence
+d'espaces d'applications sommables qui pourront être munis d'une structure
+d'espace de Banach.
+
+\begin{mandatory}
+\begin{theorem}\label{ch2:mono} Convergence monotone positive. Soit $(f_n)_{n \in \mathbb{N}}$ une suite croissante d'applications
+mesurables positives sur $(E, \mathcal{T}, \mu)$. 
+Sa limite simple $f$ existe, est mesurable et
+l'on a~:
+\[
+\int_E f d \mu = \lim_{n \to +\infty} \int_E f_n d \mu
+\]
+\end{theorem}
+\end{mandatory}
+\begin{proof}
+L'existence de $f$ ne pose aucun problème, la suite $(f_n)$ étant
+supposée croissante (il est possible que $f$ prenne la valeur
+$+\infty$ sur une partie de $E$). La mesurabilité de $f$ découle de la
+mesurabilité d'une limite simple d'applications mesurables. 
+Pour tout entier $n$, soit $(\phi_{n,k})_{k \in \mathbb{N}}$ une
+suite croissante d'applications étagées convergeant simplement vers
+$f_n$ (une telle suite existe en vertu de la proposition
+\ref{ch2:1}). On pose pour tout entier $n \in \mathbb{N}, g_n =
+sup_{k=0 \dots n} \phi_{k,n}$. $g_n$ est étagée et la suite $(g_n)$
+est croissante. Par ailleurs, pour tout entier $k$, on vérifie
+aisement que~:
+\[
+f_k \leq \lim_n g_n \leq f
+\]
+d'où, en faisant tendre $k$ vers $+\infty$, $\lim_n g_n = f$. Par la
+proposition \ref{ch2:2}, on obtient~:
+\[
+\int_E f d \mu =  \lim_n \int_E g_n d \mu
+\]
+Par définition de $g_n$, $\int_E g_n d \mu \leq \int_E f_n d \mu$, d'où~:
+\[
+\int_E f d \mu = \lim_n \int_E g_n d \mu \leq \lim_n \int_E f_n d \mu
+\]
+comme l'inégalité $\int_E f d \mu \geq \int_E f_n d \mu$ est évidente,
+on en déduit l'égalité.
+\end{proof}
+\begin{rem}
+L'argument diagonal utilisé dans cette démonstration est un grand classique des
+mathématiques: il faut le connaître et savoir l'utiliser!
+\end{rem}
+\begin{mandatory}
+\begin{theorem}\label{ch2:beppo} Beppo-Levi.
+Soit $(f_n)_{n \in \mathbb{N}}$ une suite croissante d'applications
+sommables telle qu'il existe $M >0$ avec~:
+\[
+\forall n \in \mathbb{N}, \, \int_E |f_n|d \mu \leq M
+\] 
+alors $(f_n)$ converge presque partout vers une application sommable
+$f$ et~:
+\[
+\lim_n \int_E f_n d \mu = \int_E f d\mu
+\]
+\end{theorem}
+\end{mandatory}
+\begin{proof}
+On remarque tout d'abord que la suite $(f_n)$ étant croissante, elle
+admet une limite simple $f$ (pouvant éventuellement être infinie sur
+une partie de $E$).
+Pour tout $n$, l'application $g_n = f_n -f_0$ est positive sommable car~:
+\[
+\int_E |f_n - f_0| d \mu \leq 2 M
+\]
+Le théorème \ref{ch2:mono} s'applique à la suite $(g_n)$ d'où~:
+\[
+\lim_n \int_E g_n d \mu = \int_E f - f_0 d \mu
+\]
+d'où~:
+\[
+\lim_n \int_E f_n d \mu = \int_E f d \mu
+\]
+Mais par ailleurs $\forall n \in \mathbb{N}, \int_E |f_n| d \mu \leq
+M$ et donc $\int_E |f| d \mu$ est finie. On en déduit alors que la
+partie de $E$ sur laquelle $f$ n'est pas finie est de mesure nulle, ce
+qui termine la preuve.
+\end{proof}
+\begin{mandatory}
+\begin{theorem}\label{ch2:fatou} Lemme de Fatou.
+Soit $(f_n)_{n \in \mathbb{N}}$ une suite d'applications mesurables non
+  négatives. On a~:
+\[
+\int_E (\liminf_n f_n) d \mu \leq \liminf_n \left(\int_E f_n d \mu \right)
+\]
+\end{theorem}
+\end{mandatory}
+\begin{proof}
+Pour tout entier $n$, soit $g_n = \inf_{k \geq n} f_k$. On a~:
+\[
+\liminf_n f_n = \lim_n g_n
+\]
+La suite $(g_n)$ vérifie les hypothèse du théorème \ref{ch2:mono}, on
+a donc~:
+\[
+\int_E \liminf_n f_n d\mu = \lim_n \int_E g_n d\mu \leq \liminf_n
+\int_E f_n d \mu
+\]
+\end{proof}
+\begin{mandatory}
+\begin{theorem}\label{ch2:domi} Convergence dominée.
+Soit $(f_n)$ une suite d'applications mesurables convergeant
+ simplement $\mu$-presque partout vers une application
+$f$ et telles qu'il existe
+une application sommable $g$ avec~:
+\[
+\forall n \in \mathbb{N}, \, |f_n| \leq g \quad \mu\text{-pp}
+\]
+Alors~:
+\begin{itemize}
+\item $f$ est sommable.
+\item $\lim_n \int_E f_n d\mu  = \int_E f d\mu$.
+\item $\lim_n \int_E |f_n -f | d \mu = 0$.
+\end{itemize}
+\end{theorem}
+\end{mandatory}
+\begin{proof}
+On peut supposer que la convergence simple a lieu partout, le
+comportement sur un ensemble de mesure nulle ne modifiant en rien les
+intégrales. 
+Les applications $f_n$ sont sommables car~:
+ \[\int_E |f_n| d \mu \leq
+\int_E g d \mu < +\infty \]
+Par passage à la limite, $|f| \leq g$ d'où la sommabilité de $f$.
+En remarquant que pour tout $n$, $|f_n - f| \leq 2g$, le lemme de
+Fatou permet d'écrire~:
+\[
+\liminf_n \int_E (2g -|f_n-f|) d \mu \geq \int_E \liminf_n (2g - |f_n-f|)
+d \mu
+\]
+par hypothèse, $f_n \to f$ d'où~:
+\[
+ \liminf_n \left (2g - |f_n-f| \right ) = 2g
+\]
+La linéarité de l'intégrale donne alors~:
+\[
+\liminf_n \int_E (2g -|f_n-f|) d \mu = 2 \int_E g d \mu - \limsup_n
+\int_E |f_n-f| d \mu = 2 \int_E g d \mu
+\]
+soit~:
+\[
+ \limsup_n \int_E |f_n-f| d \mu = 0
+\]
+ce qui prouve le point 3) du théorème.
+Comme~:
+\[
+\left | \int_E f_n d \mu - \int_E f d \mu \right | \leq \int_E |f_n
+-f| d \mu
+\]
+le point 2) en découle immédiatement.
+\end{proof}
+\begin{rem}
+\begin{itemize}
+\item Les conclusions du théorème de convergence dominée (ainsi que des
+précédents) s'appliquent si l'on remplace les suites d'applications
+par des familles $(f_\lambda)_{\lambda \in I}$ avec $I$ un ensemble
+d'indice muni d'une structure d'espace métrique. 
+\item Il est très important de prendre garde au fait que l'application
+  $g$ ne peut en aucun cas dépendre de $n$~: c'est une source
+  fréquente d'erreurs.
+\end{itemize}
+\end{rem}
+Il convient de toujours bien vérifier l'hypothèse de domination, qui peut se
+révéler délicate, comme l'exercice suivant va le montrer.
+\begin{exercice}
+\begin{itemize}
+\item Soit la suite d'applications $(f_n)$ définies sur $[0,1]$ par~:
+\[
+\forall x \in [0,1], \, f_n(x) = \frac{nx}{1+n^2x^2}
+\]
+Déterminer la limite simple de cette suite. Conclure quant à la limite de~:
+\[
+\int_{[0,1]} f_n(x) d \lambda(x)
+\]
+\item On considère maintenant la suite $(g_n)$, applications définies sur $\mathbb{R}$ par~:
+\[
+g_n(x) = \frac{1}{n} 1_{[0, n]}
+\]
+Déterminer la limite simple de cette suite. Peut-on appliquer le théorème de convergence
+dominée à~:
+\[
+\int_{\mathbb{R}} g_n(x) d\lambda(x)
+\]
+\end{itemize}
+\end{exercice}
+\section{Applications}
+\subsection{Intégrales dépendant d'un paramètre}
+\begin{prop}\label{ch2:contpar} Continuité des intégrales dépendant
+  d'un paramètre.
+Soit $(M,d)$ un espace métrique, $\lambda_0 \in M$, $(E, \mathcal{T},\mu)$ un espace mesuré et soit $F : M \times E \to
+\mathbb{R}$ une application telle que~:
+\begin{itemize}
+\item Pour tout $\lambda \in M$, l'application $x \to f(\lambda,x)$
+  est mesurable.
+\item L'application $\lambda \to f(\lambda,x)$ est continue en
+  $\lambda_0$ pour $\mu$-presque tout $x$.
+\item Il existe une application sommable $g$ et un voisinage $V$ de
+  $\lambda_0$ tels que~:
+\[
+\forall \lambda \in V, \, |F(\lambda,x)| \leq g(x)
+\]
+pour $\mu$-presque tout $x$.
+alors l'application~:
+\[
+\lambda \in V \to \int_E F(\lambda,x) d\mu(x)
+\]
+est bien définie et est continue en $\lambda_0$.
+\end{itemize}
+\end{prop}
+\begin{proof}
+La sommabilité de l'application $x \to F(\lambda,x)$ est acquise pour
+$\lambda \in V$ par l'hypothèse de domination. Par ailleurs, soit
+$(\lambda_n)$ une suite de points de $V$ de limite $\lambda_0$. Le
+théorème de convergence dominée donne~:
+\[
+\lim_n \int_E F(\lambda_n,x)d\mu(x) = \int_E \lim_n  F(\lambda_n,x)d\mu(x) =
+\int_E F(\lambda_0,x)d\mu(x)
+\]
+ce qui prouve la continuité en $\lambda_0$ de l'intégrale dépendant du
+paramètre $\lambda$.
+\end{proof}
+\begin{prop}\label{ch2:derpar} Dérivabilité des intégrales dépendant
+  d'un paramètre.
+Soit $I$ un intervalle ouvert de $\mathbb{R}$, $y_0 \in I$, et soit $F : I \times E \to
+\mathbb{R}$ une application telle que~:
+\begin{itemize}
+\item Pour tout $y \in I$, l'application $x \to F(y,x)$ est sommable.
+\item L'application $y \to F(y,x)$ est dérivable en $y_0$ pour $\mu$-presque
+  tout $x$. On notera~:
+\[
+\frac{\partial F}{\partial y}
+\]
+l'application égale à la dérivée de $F$ par rapport à $y$ en tout
+point $x$ où elle est définie et prenant une valeur arbitraire
+ailleurs.
+\item Il existe une application sommable $g$ telle que pour tout $y
+  \in I$~:
+\[
+|F(y,x)-F(y_0,x)| \leq g(x) |y-y_0|
+\]
+pour $\mu$-presque toute valeur de $x$.
+\end{itemize}
+Alors l'application~:
+\[
+\lambda \to \int_E F(y,x)d\mu(x)
+\]
+est dérivable en $y_0$ et sa dérivée vaut~:
+\[
+ \int_E \frac{\partial F(y_0,x)}{\partial y} d \mu(x)
+\]
+\end{prop}
+\begin{proof}
+La démonstration est une application immédiate du théorème de
+convergence dominée à la suite~:
+\[
+\frac{F(y_n,x)-F(y_0,x)}{y_n -y_0}
+\]
+avec $y_n \to y_0$.
+\end{proof}
+\begin{rem}
+Le théorème des accroissement finis montre que si il existe $g$
+sommable telle que~:
+\[
+\forall y \in I, \, \left |
+\frac{\partial F(y,x)}{\partial y} 
+\right | \leq g(x)
+\]
+pour $\mu$-presque tout $x$, alors l'hypothèse 3) de la proposition
+est automatiquement vérifiée. 
+\end{rem}
+\subsection{Sommabilité terme à terme}
+Soit $(f_n)_{n \in \mathbb{N}}$ une suite d'applications mesurables
+telle que~:
+\[
+\sum_{n \in \mathbb{N}} \int_E |f_n| d \mu < +\infty
+\]
+alors~:
+\begin{itemize}
+\item $\sum_{n \in \mathbb{N}} f_n$ converge absolument $\mu$-presque
+  partout et est som\-mable.
+\item On a~:
+\[
+\sum_{n \in \mathbb{N}} \int_E f_n d \mu = \int_E \sum_{n \in
+  \mathbb{N}} f_n d \mu 
+\]
+\end{itemize}
+\begin{proof}
+Soit $g_n = \sum_{k = 0 \dots n} |f_n|$. La suite $g_n$ est
+positive croissante, le théorème de convergence monotone s'applique
+et~:
+\[
+\lim_n \int_E g_n d \mu = \int_E \lim_n g_n d \mu 
+\]
+Or par hypothèse~:
+\[
+\lim_n \int_E g_n d \mu = \sum_n \int_E |f_n| d \mu < +\infty
+\]
+la limite $g$ de la suite $g_n$ est sommable, donc $g$ est finie
+$\mu$-presque partout. On en déduit la convergence absolue
+$\mu$-presque partout de la serie de terme général $f_n$.
+Par ailleurs, le théorème de convergence dominée s'applique aux sommes
+partielles de la série de terme général $f_n$ en prenant comme application
+dominante~:
+\[
+\sum_n |f_n|
+\]
+Ceci montre la seconde partie de la proposition.
+\end{proof}
+\begin{exercice}
+Soit $f : \mathbb{R} \to \mathbb{R}$ une application sommable. On 
+définit l'application $\phi : \mathbb{R} \to \mathbb{C}$ par~:
+\[
+\forall \xi \in \mathbb{R}, \, \phi(\xi) = \int_{\mathbb{R}} f(t) e^{-i 2 \pi \xi t} d \lambda(t)
+\]
+\begin{itemize}
+\item Montrer que $\phi$ est bien définie et est continue sur $\mathbb{R}$.
+\item On suppose maintenant que $f$ est telle que~:
+\[
+\int_{\mathbb{R}} | t f(t) | d \lambda(t) < +\infty
+\]
+Montrer que $\phi$ est dérivable et calculer sa dérivée.
+\end{itemize}
+\end{exercice}
+On peut dans certains cas utiliser le théorème de convergence dominée pour
+calculer la valeur d'intégrales généralisées (qui ne sont pas des intégrales au
+sens strict, mais uniquement des limites). Un cas classique est la détermination
+de l'intégrale de $\sin x / x$ sur $\mathbb{R}$, qui est un exercice
+fréquemment traité en classes préparatoires.
+\begin{exercice}
+Soit l'application $f : \mathbb{R} \to \mathbb{R}$~:
+\[
+x \to \left \{
+\begin{array}{cc}
+\frac{\sin x}{x} & x > 0 \\
+1 & x = 0 \\
+0 & x < 0
+\end{array}
+\right .
+\]
+\begin{itemize}
+\item Montrer que $f \notin L^1, f \in L^2$.
+\item Montrer que pour tout réel $a > 0$ l'application~:
+\[
+F : a \to \int_{\mathbb{R}} f(x) e^{-ax} dx
+\]
+est bien définie et est dérivable sur $\mathbb{R}^{+*}$.
+\item Calculer $lim_{a \to +\infty} F(a)$ et en déduire une expression simple de $F$.
+\item Montrer que $F$ se prolonge par continuité à droite en 0 et calculer $F(O^+)$.
+\end{itemize}
+La valeur obtenue pour $F(0^+)$ est aussi celle de l'intégrale généralisée de
+$\sin x/ x$ sur $\mathbb{R}^+$.
+\end{exercice}
+\subsection{Intégrale de Riemann}
+L'intégrale au sens de Riemann d'une application bornée sur un compact est,
+lorsqu'elle existe, de m\^eme valeur que celle de Lebesgue qui  existe
+nécessairement elle aussi. La suite de cette section va établir ce résultat.
+ Dans cette partie, $f : [a,b] \to \mathbb{R}$ est une
+application \textit{bornée}.
+\begin{defn}
+Une subdivision $\mathcal{P}$ de l'intervalle $[a,]$ est une suite de
+réels $(x_i)_{i=0}^{N}$ telle que $a=x_0 < x_1 < \dots < x_{N-1} < x_N
+= b$. Le pas d'une subdivision est~:
+\[
+\inf_{n=0\dots N-1} (x_{n+1} -x_n)
+\]
+Enfin, on dira qu'une subdivision $\mathcal{P}_1$ est plus fine qu'une
+subdivision $\mathcal{P}_2$ si tout point de $\mathcal{P}_2$
+appartient aussi à $\mathcal{P}_1$.
+\end{defn}
+\begin{defn}
+Une application en escalier sur $[a,b]$ est une application de la
+forme~:
+\[
+\sum_{n=0}^{N-1} y_n 1_{[x_n, x_{n+1}[}
+\]
+avec $(y_n)_{n=0\dots N-1}$ réels et $(x_n)$ subdivision de $[a,b]$.
+\end{defn}
+\begin{defn}
+Soit $f= \sum_{n=0}^{N-1} y_n 1_{[x_n, x_{n+1}[}$ une application en
+    escalier. L'intégrale de Riemann de $f$ est la quantité~:
+\[
+\int_a^b f(x) dx = \sum_{n=0}^{N-1} y_n (x_{n+1} -x_n)
+\]
+\end{defn}
+\begin{defn}
+Soit $f$ bornée sur $[a,b]$. L'intégrale inférieure (resp. supérieure)
+de $f$ est~:
+\[
+\sup \left \{ \int_a^b h(x) dx, h \mbox{ en escalier }, h \leq f \right
+\}
+\]
+resp.
+\[
+\inf \left \{ \int_a^b h(x) dx, h \mbox{ en escalier }, h \geq f \right
+\}
+\]
+Si les deux quantités sont égales, on dit que $f$ est
+Riemann-intégrable et l'intégrale de $f$, notée $\int_a^b f(x) dx$ est
+la valeur commune.
+\end{defn}
+\begin{theorem}
+Une application $f$ bornée sur $[a,b]$ est Riemann-intégrable si et
+seulement si elle est égale presque partout (relativement à la mesure
+de Lebesgue) à une application continue. On a en outre~:
+\[
+\int_a^b f(x) dx = \int_{[a,b]} f d \lambda
+\]
+avec $\lambda$ mesure de Lebesgue.
+\end{theorem}
+\begin{proof}
+Il est facile de remarquer que toute application en escalier étant une
+application étagée, les deux intégrales coïncident pour cette classe
+d'applications. 
+Supposons tout d'abord $f$ Riemann-intégrable.
+Soit $(h_n)_{n \in \mathbb{N}}$ une suite d'applications en escaliers
+ telle que $\forall n, h_n \geq f$ et
+$\lim_n \int_a^b h_n(x) dx = \int_a^b f(x) dx$. On peut, sans perte de
+généralité, supposer la suite $h_n$ décroissante.  Elle converge
+vers une limite $h$ et par application du thèorème de convergence
+dominée (on peut majorer $|h_n|$ par une constante qui est sommable
+sur le compact $[a,b]$)~: 
+\[
+\int_{[a,b]} h d \lambda = \lim_n \int_{[a,b]} h_n d \lambda = \lim_n \int_a^b
+h_n(x) dx = \int_a^b f(x) dx
+\]
+De même, on peut choisir une suite croissante d'applications en
+escalier $(g_n)$, telle que $g_n \leq f$ pour tout $n$ et $\lim_n
+\int_a^b g_n(x) dx = \int_a^b f(x) dx$. Le théorème de convergence
+dominée s'applique à nouveau et l'on a~:
+\[
+\int_{[a,b]} g d \lambda = \int_a^b f(x) dx
+\]
+avec $g$ limite de la suite $(g_n)$. 
+On en déduit~:
+\[
+\int_{[a,b]} (h-g) d \lambda = 0
+\]
+Soit $h(x)=g(x)=f(x)$ pour $\lambda$-presque toute valeur de
+$x$. Comme $h$ et $g$ sont des limites de fonctions en escalier, elles
+ne peuvent présenter qu'un ensemble dénombrable de points de
+discontinuité, d'où $f$ est égale  $\lambda$-presque partout à une
+application continue et l'intégrale de Riemann coïncide avec celle de Lebesgue.
+Supposons maintenant que l'on se donne $f$ bornée, égale
+$\lambda$-presque partout à une application continue. Soit
+$\mathcal{P}_n$ la partition de $[a,b]$ qui comporte $2^n + 1$ points
+$x_{i,n}, i=0 \dots 2^n$ divisant $[a,b]$ en segments égaux. Soit
+$M_{i,n}$ le maximum (resp. $m_{i,n}$ le minimum) de$f$ sur
+chaque intervalle $[x_{i,n}, x_{i+1,n}]$. On pose $g_n =
+\sum_{i=0}^{2^n-1} m_{i,n} 1_{[x_{i,n}, x_{i+1,n}[}$,
+    $h_n=\sum_{i=0}^{2^n-1} M_{i,n} 1_{[x_{i,n}, x_{i+1,n}[}$.
+	$f$ étant égale presque partout à une application continue, les suites
+	$(g_n),(h_n)$ convergent $\lambda$-presque partout vers $f$ et
+	par application du théorème de convergence dominée~:
+\begin{align*}
+\int_{[a,b]} f d \lambda = & \lim_n \int_{[a,b]} g_n d\lambda = \lim_n
+\int_a^b g_n(x) dx \\  
+= & \lim_n \int_{[a,b]} h_n d\lambda = \lim_n \int_a^b h_n(x) dx
+\end{align*}
+L'application $f$ est donc Riemann-intégrable et les deux intégrales
+sont égales.
+\end{proof} 
+Ce résultat montre que, sur un compact, on peut se permettre d'utiliser
+l'une ou l'autre intégrale dès lors que l'application est égale
+presque partout à une application continue. Ceci induit à confondre
+par abus de notation $\int_a^b$ avec $\int_{[a,b]}$.
+Toute application $f$ qui est limite uniforme d'applications en escalier admet
+une primitive $F$. On peut utiliser le résultat précédent pour calculer dans ce
+cas l'intégrale de Lebesgue sur un compact $[a,b]$ à l'aide de $F$:
+\[
+\int_{[a,b]}f(t) d \lambda(t) = F(b) - F(a)
+\]
+
+\begin{rem}
+Il convient d'être d'une extrême prudence avec ce que l'on appelle les
+intégrales généralisées !
+Dans le cas d'intervalles infinis (semi-infinis) ou d'ouverts, la
+notation~:
+\[
+\int_a^b f(x) dx
+\]
+désigne, si elle existe, la limite~:
+\[
+\lim_{x\to a^+, y \to b^-} \int_x^y f(x) dx
+\]
+Il ne s'agit donc pas, à proprement parler, d'une intégrale de
+Riemann. Dans le cadre de la théorie de Lebesgue, il n'y a pas de
+problème de définition même si l'on n'intègre pas sur un compact, et la
+notion d'intégrale généralisée n'a pas de sens. Dans ce cas, il
+convient donc de bien distinguer les notations. Cependant, si une
+application $f$ est telle que $\int_a^b |f(x)|dx$ existe (on dit alors
+que $f$ admet une intégrale généralisée absolument convergente),
+l'intégrale de Lebesgue de $f$ existe sur le même domaine et avec la
+même valeur (application immédiate du théorème de convergence dominée).
+\end{rem}

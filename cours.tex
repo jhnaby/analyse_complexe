@@ -1,0 +1,238 @@
+\documentclass[a4paper, twoside, 12pt, notitlepage]{book}
+\usepackage{amssymb, amstext,latexsym, amsmath, amscd, amsfonts, amsthm,cite}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+
+%\usepackage[latin1]{inputenc}
+\usepackage[all]{xy}
+\usepackage{calrsfs}
+% pour les graphiques et tableaux
+\usepackage{epsfig, float}
+\usepackage{graphicx}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows, shapes}
+\usetikzlibrary[patterns]
+\usetikzlibrary{calc,fadings,decorations.pathreplacing, bending} %stereo
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{positioning}
+\usetikzlibrary{intersections}
+\usetikzlibrary{hobby} 
+\usepackage{mathrsfs}
+\usepackage{framed}
+\usepackage[marginparwidth=2cm, marginparsep=0.5cm]{geometry}
+%\usepackage{marginnote}
+% pour les références
+
+%\usepackage{pb-diagram, pb-xy}
+
+
+\RequirePackage[colorlinks=true,citecolor=blue,linkcolor=blue, urlcolor=blue]{hyperref}
+%\usepackage{hyperref}
+
+
+\newtheoremstyle{remarque}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\small}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\scshape}% name of head font
+  {. ---}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+
+\graphicspath{{images/}}
+
+% mes definitions
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{definition}{Définition}[section]
+\newtheorem{lemma}{Lemme}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{cor}{Corollaire}[section]
+
+\newtheorem{exem}{Exemple}[section]
+%\newtheorem{exer}{Exercice}[section]
+\theoremstyle{definition}
+\newtheorem{exer}{}[chapter]
+
+\theoremstyle{remarque}
+\newtheorem{rem}{Remarque}[chapter]
+%\newtheorem{proof}{Preuve}
+\newenvironment{MYenumerate}{%
+  \renewcommand{\labelenumi}{(\roman{enumi})}%
+\begin{enumerate}}{\end{enumerate}}
+
+
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}
+\DeclareMathOperator\Arg{Arg}
+
+\def \C{\mathbb{C}}
+\def \R{\mathbb R}
+\def \Q{\mathbb Q}
+\def \N{{\mathbb N}}
+\def \Z{{\mathbf Z}}
+
+\def\sh{\mathrm{sh}}
+\def\ch{\mathrm{ch}}
+\def\th{\mathrm{th}}
+\def\cth{\mathrm{cth}}
+
+
+
+\newcommand{\ind}{\mathbbm{1}}
+\newcommand{\rme}{\mathrm{e}}
+% définitions des marges
+\setlength{\topmargin}{-2cm}
+\setlength{\textheight}{24cm}
+\setlength{\textwidth}{16cm}
+\setlength{\oddsidemargin}{-0.2cm}
+\setlength{\evensidemargin}{0.2cm}
+\setlength{\leftmargin}{-3cm}
+\setlength{\rightmargin}{3cm}
+
+\def\alert#1{{\color{red} #1}}
+
+
+
+
+
+
+
+
+
+\begin{document}
+\definecolor{pred}{RGB}{255,0,0}
+\definecolor{pgreen}{RGB}{0,255,72}	%complementaire precedente
+\definecolor{dgreen}{RGB}{0,103,82}
+\definecolor{pblue}{RGB}{0,22,255}
+\definecolor{pyellow}{RGB}{255,200,0} %complementaire precedente
+\definecolor{porange}{RGB}{183,83,18}
+
+\definecolor{tyellow}{RGB}{255,251,25} %complementaire triad pred
+\definecolor{tblue}{RGB}{0,112,178}
+\definecolor{pleaf}{RGB}{239,207,184}
+
+
+%Environnement Stéphane cours
+\newtheorem{defn}{Définition}
+\newsavebox{\fthmbox}
+\newsavebox{\fdefnbox}
+\tikzstyle{thmbox} = [draw=dgreen, fill=pgreen!20, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{defnbox} = [draw=porange, fill=pleaf!20, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\newenvironment{fthm}{%
+	\begin{lrbox}{\fthmbox}%
+	\begin{minipage}{0.95\textwidth}
+	\begin{theorem}
+	
+}{%
+\end{theorem}
+\end{minipage}
+\end{lrbox}
+
+\begin{center}
+\begin{tikzpicture}
+\node[thmbox] (box) {%
+	\usebox{\fthmbox}
+};
+\end{tikzpicture}
+\end{center}
+}
+
+\newenvironment{fprop}{%
+	\begin{lrbox}{\fthmbox}%
+	\begin{minipage}{0.95\textwidth}
+	\begin{prop}
+	
+}{%
+\end{prop}
+\end{minipage}
+\end{lrbox}
+
+\begin{center}
+\begin{tikzpicture}
+\node[thmbox] (box) {%
+	\usebox{\fthmbox}
+};
+\end{tikzpicture}
+\end{center}
+}
+
+\newenvironment{fdefn}{%
+	\begin{lrbox}{\fdefnbox}%
+	\begin{minipage}{0.95\textwidth}
+	\begin{defn}
+	
+}{%
+\end{defn}
+\end{minipage}
+\end{lrbox}
+
+\begin{center}
+\begin{tikzpicture}
+\node[defnbox] (box) {%
+	\usebox{\fdefnbox}
+};
+\end{tikzpicture}
+\end{center}
+}
+
+
+\newenvironment{fcor}{%
+	\begin{lrbox}{\fthmbox}%
+	\begin{minipage}{0.95\textwidth}
+	\begin{cor}
+	
+}{%
+\end{cor}
+\end{minipage}
+\end{lrbox}
+
+\begin{center}
+\begin{tikzpicture}
+\node[thmbox] (box) {%
+	\usebox{\fthmbox}
+};
+\end{tikzpicture}
+\end{center}
+}
+
+
+
+\newcounter{ExoCtr}
+\newenvironment{exercice}{
+\begin{leftbar}
+\stepcounter{ExoCtr}{\bfseries Exercice}
+\arabic{ExoCtr}
+}{\end{leftbar}}
+
+
+\title{Fonctions de la variable complexe et intégration dans le plan complexe.}
+\author{Johan Aubray, Pascal Lezaud, Stephane Puechmorel}
+\date{2024} 
+
+\maketitle
+
+
+\tableofcontents
+
+
+\input{chapitres/0_introduction.tex}
+\input{chapitres/1_topologie}
+\input{chapitres/2_holomorphie.tex}
+\input{chapitres/3_integration}
+\input{chapitres/4_residus}
+\input{chapitres/5_laplace}
+\input{chapitres/6_surfaces_riemann}
+\appendix 
+\input{chapitres/7_annexe}
+
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+\end{document}

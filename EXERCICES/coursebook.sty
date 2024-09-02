@@ -1,0 +1,142 @@
+\ProvidesPackage{coursebook}
+
+\usepackage{graphicx}
+\usepackage{calc}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{array}% http://ctan.org/pkg/array
+%\usepackage{showframe}% http://ctan.org/pkg/showframe
+\usepackage{yhmath}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{marginnote}
+\usepackage{mparhack}
+\usepackage{color}
+\usepackage{framed}
+\RequirePackage{tikz} % un superbe paquetage pour le dessin !
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Bibliography
+%
+\newcommand{\bibentry}[3]{{#1}:{\emph{{#2}}} ({\footnotesize {#3}})}
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Math notations
+%
+%\newcommand{\vect}[1]{\ensuremath{\overrightarrow{#1}}}
+\newcommand{\vect}[1]{\ensuremath{\underline{#1}}}
+% several common operators
+\DeclareMathOperator*{\sinc}{sinc}
+
+\begingroup
+\makeatletter
+\g@addto@macro\framed{%
+\let\marginnoteleftadjust\FrameSep
+\let\marginnoterightadjust\FrameSep
+}
+\makeatother
+\endgroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Raccourcis divers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\R{\ensuremath{\mathbb{R}}}
+\def\N{\ensuremath{\mathbb{N}}}
+\def\C{\ensuremath{\mathbb{C}}}
+\definecolor{shadecolor}{RGB}{180,220,230}
+\definecolor{darkgreen}{RGB}{64,150,64}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Un théorème personnalisé !
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \tikzstyle{plain@title} =[draw=red, rounded corners,
+ fill=blue, text= white]
+ \tikzstyle{plain@box} = [draw=red, fill=blue!20, very thick,
+                        rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+ \tikzstyle{defn@title} =[draw=orange, rounded corners,
+ fill=darkgreen, text= white]
+ \tikzstyle{defn@box} = [draw=orange, fill=green!20, very thick,
+                        rectangle, rounded corners, inner sep=10pt, inner
+ysep=20pt]
+\tikzstyle{ex@title} =[draw=blue, rounded corners,
+ fill=orange, text= white]
+ \tikzstyle{ex@box} = [draw=blue, fill=orange!20, very thick,
+                        rectangle, rounded corners, inner sep=10pt, inner
+ysep=20pt]
+\newsavebox{\fthmbox}
+\newcommand{\titre}{}
+\def\fthmplain{plain}
+\def\fthmdefn{defn}
+\def\fthmex{ex}
+\newtoks\fthm@style
+\fthm@style{plain}
+\newcommand{\fthmstyle}[1]{%
+  \@ifundefined{fthm#1}{%
+   \PackageWarning{coursebook}{Unknown theoremstyle `#1'}%
+  \fthm@style{plain}%
+}{%
+  \fthm@style{#1}%
+}%
+}
+\newenvironment{encadre}[3][]%
+	{%
+		\ifx\relax#1\relax %
+			\renewcommand{\titre}{#2}%
+		\else
+			\renewcommand{\titre}{#2 (#1)}%
+		\fi
+		\def\titlestyle{#3@title}
+		\def\boxstyle{#3@box}
+		\begin{lrbox}{\fthmbox}%
+		\begin{minipage}[!h]{\textwidth-25pt}
+	}
+	{%
+		\end{minipage}
+		\end{lrbox}
+		
+		\begin{center}
+		\begin{tikzpicture}64
+		\node[\boxstyle](box){\usebox{\fthmbox}};
+		\node[\titlestyle, right=10pt] at (box.north west) {\titre};
+		\end{tikzpicture}
+		\end{center}
+	}
+\newcommand{\newfancythm}[2]{%
+	\@ifundefined{the#1}{\newcounter{#1}}{}
+ 	\edef\cmpstyle{\the\fthm@style}
+	\ifx\fthmplain\cmpstyle%
+	  \newenvironment{#1}[1][]{%
+		\stepcounter{#1}
+		\begin{encadre}[##1]{#2%
+\arabic{section}.\arabic{#1}}{plain}
+	}
+	{%
+		\end{encadre}
+	}
+	\else
+	\ifx\fthmdefn\cmpstyle%
+	  \newenvironment{#1}[1][]{%
+		\stepcounter{#1}
+		\begin{encadre}[##1]{#2%
+\arabic{section}.\arabic{#1}}{defn}
+	}
+	{%
+		\end{encadre}
+	}
+	\else
+	\newenvironment{#1}[1][]{%
+		\stepcounter{#1}
+		\begin{encadre}[##1]{#2 %
+\arabic{section}.\arabic{#1}}{ex}
+	}
+	{%
+		\end{encadre}
+	}
+	\fi\fi
+}
+

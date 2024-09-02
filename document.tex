@@ -1,0 +1,87 @@
+\pdfminorversion=4
+\documentclass[a4paper,12pt]{amsbook}
+\usepackage[french]{babel}
+\usepackage[font={small,it}]{caption}
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{marginnote}
+\usepackage{mparhack}
+\usepackage{framed}
+%\usepackage{times}
+\theoremstyle{plain}
+\newtheorem{theorem}{Théorème}
+\newtheorem{corollaire}{Corollaire}
+\newtheorem{lemme}{Lemme}
+\newtheorem{prop}{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}{Définition}
+\newtheorem{ax}{Axiome}
+\newtheorem{ex}{Exercice}
+\theoremstyle{remark}
+\newtheorem{notation}{Notation}
+\newtheorem{rem}{Remarque}
+\newtheorem{term}{Terminologie}
+\newtheorem{exemple}{Exemple}
+% several common operators
+\DeclareMathOperator*{\sinc}{sinc}
+
+\begingroup
+\makeatletter
+\g@addto@macro\framed{%
+\let\marginnoteleftadjust\FrameSep
+\let\marginnoterightadjust\FrameSep
+}
+\makeatother
+\endgroup
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Raccourcis divers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\rs}{\widehat{\mathbb{C}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environnement exercice
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{ExoCtr}
+\newenvironment{exercice}{
+\begin{leftbar}
+\stepcounter{ExoCtr}{\bfseries Exercice}
+\arabic{ExoCtr}
+\marginnote{\includegraphics[scale=0.4]{images/k-word-icon.png}}}{\end{leftbar}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Environnement mandatory
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{mandatory}{%
+\begin{leftbar}\marginnote{\includegraphics[scale=0.2]{images/books-icon.png}}}{\end{leftbar}}
+
+\title{Analyse II - Fonctions d'une variable complexe}
+\author{S. Puechmorel}
+\date{\today}
+
+\begin{document}
+%\maketitle
+\tableofcontents
+% \include{chapitres/mesures}
+% \include{chapitres/fct_mesurables}
+% \include{chapitres/integrale_lebesgue}
+% \include{chapitres/convergence_dominee}
+% \include{chapitres/integrales_multiples}
+% \include{chapitres/espaces_lp}
+% \include{chapitres/fourier}
+\include{chapitres/integration_formes}
+\include{chapitres/holomorphie}
+\include{chapitres/integration_complexe}
+\include{chapitres/residus}
+\include{chapitres/multiforme}
+\include{chapitres/laplace}
+\end{document}

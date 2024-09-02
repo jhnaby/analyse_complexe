@@ -1,0 +1,754 @@
+\chapter{Transformation de Fourier}
+\section{Introduction}
+La transformation de Fourier a été introduite en 1822 par J. Fourier au
+cours de ses travaux sur l'équation de la chaleur. Son assertion initiale était
+que toute application périodique pouvait se décomposer sous la forme d'une série
+de fonctions sinus (ou cosinus), de fréquences multiples de l'inverse de la
+période de l'application. Bien qu'inexacte en général, cette écriture a ouvert
+la voie à une famille de représentation de fonctions éventuellement discontinues
+sous la forme d'une série d'applications elles-même très régulières. En
+interprétant les sommes de Fourier comme des sommes de Riemann, on peut
+également étendre la théorie à une transformation intégrale, d'une grande
+importance aussi bien pour les applications (traitement du signal en
+particulier) que du point de vue fondamental (équations aux dérivées
+partielles). La grande force de la transformation de Fourier est de permettre
+une reformulation des opérateurs différentiels en opérateurs effectuant des
+produits par des applications polynomiales: résoudre une équation différentielle
+dans ce cadre revient à résoudre une équation ordinaire (que l'on espère plus
+simple). 
+\section{Transformée de Fourier des applications de $L^1$}
+\begin{mandatory}
+\begin{defn}
+Soit $f : \mathbb{R}^n \to \mathbb{C}$ une application de
+$L^1(\mathbb{R}^n)$. La transformée de Fourier de $f$ est
+l'application $\widehat{f} : \mathbb{R}^n \to \mathbb{C}$ définie
+par~:
+\[
+\forall \xi \in \mathbb{R}^n, \widehat{f}(\xi) = \int_{\mathbb{R}^n}
+f(x) e^{-i \langle x ,\xi \rangle} d \lambda(x)
+\]
+\end{defn}
+\end{mandatory}
+\begin{rem}
+Dans certains cas, on trouve une définition de la transformation de
+Fourier faisant apparaître un facteur $2\pi$ devant le produit
+scalaire~: ceci ne change rien aux propriétés fondamentales, sauf en
+ce qui concerne la formule d'inversion que nous verrons plus loin. Cette
+formulation alternative est la plus courant en traitement du signal, où l'on
+recherche une interprétation de la variable de Fourier en terme de fréquence.
+\end{rem}
+On utilisera dans la suite indifféremment la notation $\widehat{f}$ ou
+$\mathcal{F}(f)$ pour désigner la transformée de Fourier de $f$.
+\begin{mandatory}
+\begin{prop}
+La transformée de fourier d'une application de $L^1(\mathbb{R}^n)$ est
+une application de $L^\infty(\mathbb{R}^n)$. La transformation de
+Fourier est un opérateur linéaire continu entre ces deux ensembles.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+On a de façon évidente~:
+\[
+\forall \xi \in \mathbb{R}^n, \, |\widehat{f}(\xi)| \leq
+\int_{\mathbb{R}^n} | f(x) | d\lambda(x)
+\]
+d'où~:
+\[
+\| \widehat{f} \|_{\infty} \leq \| f \|_1
+\]
+ce qui montre la continuité de l'opérateur linéaire défini par la
+transformée de Fourier.
+\end{proof}
+\begin{exercice}
+Déterminer les transformées de Fourier des applications suivantes~:
+\[
+\begin{array}{c}
+f_1 \colon x \mapsto e^{-|x|} \\
+f_2 \colon x \mapsto \begin{cases}
+1-|x| & \text{ si } |x| \leq 1 \\
+0 & \text{ sinon }
+\end{cases}
+\end{array}
+\]
+\end{exercice}
+Le lemme suivant est important pour établir les formules d'inversion de la
+transformation de Fourier:
+\begin{mandatory}
+\begin{prop}\label{fourier:1}
+Soient $f,g \in L^1(\mathbb{R}^n)$. On a~:
+\[
+\int_{\mathbb{R}^n} f(x) \widehat{g}(x) d \lambda(x) = \int_{\mathbb{R}^n} \widehat{f}(y) g(y) d \lambda(y)
+\]
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Les applications $f, g$ étant dans $L^1(\mathbb{R}^n)$,
+l'application $(x,y) \to f(x)g(y)$ est dans $L^1(\mathbb{R}^{2n})$. 
+Pour prouver ce fait, on note tout d'abord que l'application $(x,y) \mapsto
+f(x)$ est mesurable car composée de la projection sur le premier facteur et de
+l'application $f$. De même pour l'application $(x,y) \mapsto g(y)$. On en déduit
+que l'application: $(x,y) \mapsto f(x)g(y)$ est mesurable car produit
+d'applications mesurables. Le théorème de Tonnelli permet alors d'écrire:
+\[
+\int_{\mathbb{R}^{2n}}|f(x)g(y)|d\lambda(x)d\lambda(y) = \int_{\mathbb{R}^n}
+|f(x)| d \lambda(x)\int_{\mathbb{R}^n}
+|g(y)| d \lambda(y) < +\infty
+\]
+ On en
+déduit par application du théorème de Fubini~:
+\begin{align*}
+& \int_{\mathbb{R}^n} f(x) \int_{\mathbb{R}^n} g(y) e^{-i \langle x,y
+      \rangle} d \lambda(y) d  \lambda(x) = \\
+& \int_{\mathbb{R}^{2n}} f(x) g(y) e^{-i \langle x,y
+      \rangle} d \lambda (x,y) = \\
+&\int_{\mathbb{R}^n} g(y) \int_{\mathbb{R}^n} f(x) e^{-i \langle x,y
+      \rangle} d \lambda(x) d  \lambda(y) 
+\end{align*}
+ce qui montre la proposition.
+\end{proof}
+La transformation de Fourier posséde un comportement simple vis à vis des
+opérations de translation et de changement d'échelle. Le résultat ci-dessous est
+donné sans démonstration, que le lecteur pourra faire à titre d'exercice.
+\begin{mandatory}
+\begin{prop}
+Soit $f \in L^1(\mathbb{R}^n)$. Soit $v \in \mathbb{R}^n$. On définit la
+translatée de $f$ en $v$ par:
+\[
+T_v f \colon x \in \mathbb{R}^n \mapsto f(x-v)
+\]
+On a alors:
+\[
+\forall \xi \in \mathbb{R}^n, \, \widehat{T_v f}(\xi) = e^{-i \langle
+v, \xi \rangle}\widehat{f}(\xi)
+\]
+De même, soit $t > 0$ un réel. La dilatée de $f$ par $t$ est l'application:
+\[
+S_t f \colon x \in \mathbb{R}^n \mapsto t^{-n} f\left(\frac{x}{t}\right)
+\]
+On a:
+\[
+\forall \xi \in \mathbb{R}^n, \, \widehat{S_t f}(\xi) = \widehat{f}(t \xi)
+\]
+\end{prop}
+\end{mandatory}
+Enfin, comme annoncé en introduction, une dérivée partielle sera transformée en
+multiplication par un monôme.
+\begin{term}
+On notera $D_jf$  la dérivée partielle de $f$ par rapport à la
+$j$-ième coordonnée.
+\end{term}
+\begin{mandatory}
+\begin{prop}
+Soit $j \in \{ 1 \dots n \}$.
+Soit $f \in L^1(\mathbb{R}^n)$ telle que l'application $x \to x_j
+f(x)$ (avec $x_j$ $j$-ième composante du vecteur $x$) soit dans
+$L^1(\mathbb{R}^n)$ alors~:
+\[
+D_j \widehat{f} = - i \widehat{x_j f(x)}
+\]
+\end{prop}
+\end{mandatory}
+\begin{proof}
+La transformée de Fourier de $f$ est définie par~:
+\[
+\widehat{f}(\xi) = \int_{\mathbb{R}^n} f(x) e^{- i \langle x, \xi
+  \rangle } d \lambda(x)
+\]
+Il s'agit d'une intégrale dépendant d'un paramètre. Comme par ailleurs
+on a pour tout $x_0 \in \mathbb{R}^n$ et tout réel $h$~:
+\[
+|f(x) e^{-i \langle x, \xi  \rangle } - f(x) e^{-i \langle x, \xi + h
+ e_j  \rangle }  |\leq |f(x)||x_j h|
+\]
+Le théorème de dérivation s'applique donc et donne le résultat.
+\end{proof}
+\begin{lemme}
+L'ensemble des applications continues à support compact est dense dans
+$L^1(\mathbb{R}^n)$. 
+\end{lemme}
+\begin{proof}
+Les applications étagées sont denses de façon évidente dans
+$L^1(\mathbb{R}^n)$. Montrons dans un premier temps que l'espace
+engendré par les applications de la forme~:
+\[
+1_{\prod_{i=1\dots n} ]a_i, b_i[}
+\]
+est dense dans $L^1(\mathbb{R}^n)$. Soit $A$ un borélien borné.
+Par définition de
+la mesure de Lebesgue, il existe, pour tout $\epsilon >0$, une suite 
+d'hyperrectangles $R_j = \prod_{i=1\dots n} ]a_i(j), b_i(j)[$ telle que $\cup_j R_j \supset A$ et~:
+\[
+\sum_j \lambda(R_j) < \lambda(A) + \frac{\epsilon}{2}
+\]
+par ailleurs, $A$ étant borné, la série $\sum_j \lambda(R_j)$ est
+convergente. Il existe donc un entier $n_0$ tel que $\sum_{j > n_0}
+\lambda(R_j) < \frac{\epsilon}{2}$. L'application~:
+\[
+g = \sum_{j=1}^{n_0} 1_{R_j} 
+\]
+vérifie alors $\| 1_A -g \|_1 < \epsilon$. 
+Soit maintenant un hyperrectangle $R = \prod_{i=1\dots n} ]a_i, b_i[$
+  et soit pour $\eta > 0$, l'application~:
+\[
+h_\eta : x \to \left  \{
+\begin{array}{ll}
+0 & x \notin [0,1] \\
+\frac{x}{\eta} & 0 \leq x < \eta \\
+1 & \eta \leq x < 1-\eta \\
+\frac{1-x}{\eta} & 1-\eta \leq x \leq 1
+\end{array}
+\right .
+\]
+L'application~:
+\[
+g : x \to \prod_{i=1\dots n} h_\eta \left ( \frac{x_i - a_i +\eta}{b_i
+  - a_i + 2 \eta} 
+\right )
+\]
+est continue et~:
+\[
+\| 1_R - g \|_1 \leq \prod_{i=1\dots n} (b_i - a_i + 2 \eta) -
+\prod_{i=1\dots n} (b_i - a_i) 
+\]  
+ce qui achève la démonstration, $\eta$ étant arbitraire.
+\end{proof}
+\begin{prop}\label{dens:1}
+L'ensemble des applications indéfiniment dérivables à support compact
+est dense dans $L^1(\mathbb{R}^n)$. 
+\end{prop}
+\begin{proof}
+Il suffit de trouver une application indéfiniment dérivable vérifiant
+les mêmes propriétés que $h$ dans la démonstration précédente. Il
+existe tout d'abord des applications indéfiniment dérivables à support
+compact. On peut par exemple prendre, sur $[0,1]$~:
+\[
+\psi : x \to \exp \left (
+\frac{-1}{x(1-x)}
+\right )
+\]
+Considérons maintenant~:
+\[
+\phi : x \to \left  \{
+\begin{array}{ll}
+0 & x < 0 \\
+\int_{[0,x]} \psi d \lambda / \int_{[0,1]} \psi d \lambda & x \in ]0,
+1[ \\
+1 & x \geq 1
+\end{array}
+\right .
+\]
+L'application $\psi$ est indéfiniment dérivable. On est maintenant en
+mesure d'exhiber une application semblable à $h$ de la démonstration
+précédente, mais indéfiniment dérivable~:
+\[
+h_\eta : x \to \left  \{
+\begin{array}{ll}
+0 & x \notin [0,1] \\
+\phi \left (\frac{x}{\eta} \right ) & 0 \geq x < \eta \\
+1 & \eta \geq x < 1-\eta \\
+\phi \left (\frac{1-x}{\eta} \right ) & 1-\eta \geq x \leq 1
+\end{array}
+\right .
+\]
+\end{proof}
+\begin{mandatory}
+\begin{theorem} (Riemann-Lebesgue)
+Soit $f \in L^1(\mathbb{R}^n)$. On a~:
+\[
+\lim_{\| \xi \| \to \infty} |\widehat{f}(\xi)| = 0
+\]
+\end{theorem}
+\end{mandatory}
+\begin{proof}
+Soit $\phi$ application indéfiniment dérivable à support compact. On
+a~:
+\[
+(1+\| \xi \|^2) \widehat{\phi}(\xi) = \mathcal{F}\left(\phi + \sum_{i=1}^n
+  D^2_i \phi \right)(\xi) \leq \| \phi + \sum_{i=1}^n
+  D^2_i \phi \|_1
+\]
+Le résultat est immédiat dans ce cas. Pour $f \in L^1(\mathbb{R}^n)$
+quelconque, on applique la densité des applications indéfiniment
+dérivables à support compact pour montrer que pour tout $\epsilon > 0$
+il existe $\phi$ indéfiniment dérivable à support compact vérifiant
+$\| f - \phi \|_1 < \epsilon$. Comme par ailleurs~:
+\[
+\widehat{f}(\xi) \leq \| f- \phi \|_1 + \widehat{\phi}(\xi)
+\]
+on a le résultat général.
+\end{proof}
+\begin{mandatory}
+\begin{prop}
+Soit $f \in L^1(\mathbb{R}^n)$ admettant une dérivée partielle $D_j f$
+elle-même dans $ L^1(\mathbb{R}^n)$. On a~:
+\[
+\widehat{D_j f}(\xi) =  i \xi_j \widehat{f}(\xi)
+\]
+avec $\xi_j$ $j$-ième composante du vecteur $\xi$.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Il suffit de montrer le théorème pour une application $f : \mathbb{R}
+\to \mathbb{C}$.
+On a~:
+\[
+\widehat{f^\prime}(\xi) = \int_{\mathbb{R}} f^\prime (x) e^{-i \langle \xi,
+  x \rangle } d \lambda(x)
+\]
+Le théorème de convergence dominée permet d'écrire~:
+\[
+\lim_{k \to + \infty} \int_{[-k,k]} f^\prime (x) e^{-i \langle \xi,
+  x \rangle} d \lambda(x) = \widehat{f\prime}(\xi)
+\]
+en faisant une intégration par parties, on obtient~:
+\begin{align*}
+& \int_{[-k,k]} f^\prime(x) e^{-i \langle \xi,
+  x \rangle } d \lambda(x) = \\
+&[f(x) e^{-i \langle
+  x, \xi \rangle }]_{-k}^k +  \int_{[-k,k]} i \xi f(x) e^{-i \langle\xi,
+  x \rangle } d \lambda(x)
+\end{align*}
+comme par ailleurs $f(x) = f(0) +\int_{[0,x]} f^\prime(u) du$, $f$
+admet une limite en $+\infty, -\infty$.$f$ étant sommable, cette
+limite est nulle et l'on déduit le résultat en faisant $k \to +\infty$.
+\end{proof}
+Il est possible dans certains cas d'inverser la transformation de Fourier pour
+obtenir la fonction de départ (en fait de façon plus précise, un représentant
+de la même classe d'équivalence dans $L^1(\mathbb{R}^n$). Les contraintes qui
+sont imposées à l'application dont on souhaite inverser la transformée de
+Fourier sont néanmoins assez fortes (égalité presque partout avec une
+application continue). Pour énoncer et démontrer la formule d'inversion, deux
+lemmes sont nécessaires.
+\begin{lemme}\label{fourier:3}
+Soit l'application $\phi \colon \mathbb{R} \to \mathbb{R}$ définie par~:
+\[
+\phi : x \to \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}
+\]
+on a~:
+\[
+\widehat{\phi} : \xi \to e^{- \frac{\xi^2}{2}}
+\]
+\end{lemme}
+\begin{proof}
+L'application $\phi$ appartient à $L^1(\mathbb{R})$ et vérifie l'équation
+différentielle $\phi^\prime + x \phi = 0$. Il suffit de montrer que $\widehat{\phi}$ vérifie la même.
+Le théorème de dérivation des intégrales dépendant d'un paramètre
+s'appliquant de façon évidente ($\phi$ est à décroissance
+exponentielle)~:
+\[
+\widehat{\phi}^\prime(\xi) = -i \int
+\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} x e^{-i \xi x} dx
+\]
+Par ailleurs, $\lim_{|x| \to +\infty} \phi(x) = 0$, d'où par intégration
+par parties~:
+\[
+\widehat{\phi}^\prime(\xi) = - \xi \widehat{\phi}
+\]
+on en déduit que $\widehat{\phi}$ est solution de l'équation différentielle:
+$$\widehat{\phi}^\prime(\xi)+\xi \widehat{\phi}(\xi)=0$$
+ et donc:
+\[
+\widehat{\phi}(\xi) = K e^{-\frac{\xi^2}{2}}
+\]
+La constante $K$ se détermine en remarquant que l'on doit avoir~:
+\[
+\widehat{\phi}(0) = \int \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} dx = 1
+\]
+\end{proof}
+Dans la suite, on posera pour $a > 0$:
+\[
+\phi_a \colon x \in \mathbb{R} \mapsto \frac{1}{a}
+\exp\left(-\frac{x^2}{2a^2}\right)
+\]
+\begin{lemme}\label{fourier:4}
+Soit $f \in L^1(\mathbb{R})$. On a $\lim_{a \to 0^+} f *
+\phi_a = f$ dans $L^1(\mathbb{R})$.
+\end{lemme}
+\begin{proof}
+On suppose dans un premier temps que $f$ est continue à support compact.
+On a, en utilisant la parité de $\phi_a$:
+\begin{align*}
+f * \phi_a(y) & = \int_{\mathbb{R}} f(x) \phi_a(y-x) d \lambda(x) \\
+&= \frac{1}{\sqrt{2\pi}} \int_\mathbb{R} f(x) a^{-1}
+\exp\left(-\frac{(x-y)^2}{2a^2}\right) d \lambda(x)
+\end{align*}
+En effectuant le changement de variable $u=(x-y)a^{-1}$, on en déduit:
+\[
+f * \phi_a(y) = \frac{1}{\sqrt{2\pi}} \int_{\mathbb{R}} f(au+y)
+\exp\left(-\frac{u^2}{2}\right) d\lambda(u)
+\]
+$f$ continue à support compact est bornée en valeur absolue par une constante
+$M$, on a donc pour tout $u \in \mathbb{R}$:
+\[
+\left|f(au+y)
+\exp\left(-\frac{u^2}{2}\right)\right| \leq M \exp\left(-\frac{u^2}{2}\right)
+\]
+Le théorème de convergence dominée s'applique, et en utilisant la continuité de
+$f$, on a finalement pour $a \to 0^+$:
+\[
+\lim_{a \to 0^+} f * \phi_a(y) = f(y)
+\]
+Soit maintenant $f\in L^1(\mathbb{R})$ quelconque. Il existe une suite
+d'applications continues à support compact $(f_n)_{n \in \mathbb{N}}$ de limite
+$f$ dans $L^1(\mathbb{R})$. On a:
+\[
+\|f*\phi_a - f_n*\phi_a\|_1 = \|(f-f-n)*\phi_a\|_1 \leq \|f-f_n\|_1\|\phi_a\|_1
+= \|f-f_n\|_1
+\]
+En passant à la limite $a \to 0^+$, on en déduit:
+\[
+\|\lim_{a\to 0^+}f*\phi_a - f_n\|_1  \leq \|f-f_n\|_1
+\]
+Puis, en faisant $n \to +\infty$:
+\[
+\|\lim_{a\to 0^+}f*\phi_a - f\|_1 = 0
+\]
+qui donne le résultat annoncé
+\end{proof}
+Ce résultat est intéressant en soi: il montre l'existence d'une approximation de
+l'unité dans $L^1(\mathbb{R})$ pour le produit de convolution. On peut
+utiliser cette propriété pour adjoindre une unité $\delta$ à $L^1(\mathbb{R})$
+(mais cette unité n'est pas elle-même une application de $L^1(\mathbb{R})$). 
+
+La formule d'inversion permet de calculer une application dont la tansformée
+de Fourier est connue. Bien que relativement restrictive, elle est fréquemment
+utilisée en traitement du signal pour passer du spectre fréquentiel au signal
+qui lui a donné naissance.
+\begin{mandatory}
+\begin{theorem}{(Formule d'inversion)}
+Soit $f \in L^1(\mathbb{R}^n)$ telle que $\widehat{f} \in L^1(\mathbb{R}^n)$.
+L'application:
+\[
+x \in \mathbb{R}^n \mapsto \frac{1}{(2\pi)^n} \int_{\mathbb{R}^n}
+\widehat{f}(\xi)\exp\left(i \langle x, \xi \rangle\right) d \lambda(\xi)
+\]
+est égale presque partout à $f$.
+\end{theorem}
+\end{mandatory}
+\begin{proof}
+Pour simplifier la preuve, on se placera dans $L^1(\mathbb{R})$, l'extension au
+cas multi-dimensionnel se faisant par application du théorème de Fubini.
+Soit $f \in L^1(\mathbb{R})$ telle que $\widehat{f} \in L^1(\mathbb{R})$. Pour
+tout $a>0$, la proposition \ref{fourier:1} et le lemme \ref{fourier:3}
+permettent d'écrire:
+\begin{align*}
+& \int_{\mathbb{R}}f(x) \frac{1}{a}\exp\left(-\frac{(y-x)^2}{2a^2}\right) d
+\lambda(x) = \\
+& \frac{1}{\sqrt{2\pi}} \int_{\mathbb{R}}
+\widehat{f}(\xi)\exp\left(i \langle x, \xi
+\rangle\right)\exp\left(-\frac{a^2\xi^2}{2}\right) d \lambda(\xi)
+\end{align*}
+Le membre de gauche de l'égalité est $\sqrt{2\pi}f*\phi_a$. 
+On a de plus:
+\[
+\forall \xi \in \mathbb{R}, \,
+\left|\widehat{f}(\xi)\exp\left(i \langle x, \xi
+\rangle\right)\exp\left(-\frac{a^2\xi^2}{2}\right)\right| \leq |\widehat{f}(\xi)|
+\]
+Le théorème de convergence dominée s'applique donc au membre de droite et on en
+déduit:
+\[
+\lim_{a \to 0^+} f * \phi_a = \frac{1}{2 \pi}  \int_{\mathbb{R}}
+\widehat{f}(\xi)\exp\left(i \langle x, \xi
+\rangle\right) d \lambda(\xi)
+\]
+Le lemme \ref{fourier:4} donne la conclusion recherchée.
+\end{proof}
+\begin{rem}
+La transformée de Fourier inverse, au même titre que la transformée directe, est
+une application bornée continue. Une application de $L^1(\mathbb{R}^n)$ ne
+pourra donc avoir une transformée de Fourier dans $L^1(\mathbb{R}^n)$
+que si elle est égale presque partout à une application continue bornée. 
+\end{rem}
+La transformation de Fourier possède de bonnes propriétés vis-à-vis du produit
+de convolution:
+\begin{mandatory}
+\begin{prop}
+Soient $f,g \in L^1(\mathbb{R})$. On a:
+$$\mathcal{F}(f*g)=\mathcal{F}(f).\mathcal{F}(g)$$
+ De plus, si
+$\widehat{f},\widehat{g}$ sont dans $L^1(\mathbb{R})$, on a:
+$$\mathcal{F}^{-1}(\widehat{f}*\widehat{g})=2 \pi
+\mathcal{F}^{-1}(\widehat{f}).\mathcal{F}^{-1}(\widehat{g})=2 \pi f . g$$
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Par définition du produit de convolution:
+\[
+(f*g)(y) = \int_{\mathbb{R}} f(y-x)g(x) d\lambda(x)
+\]
+Sa transformée de Fourier est:
+\[
+\mathcal{F}(f*g) \colon \xi \mapsto \int_{\mathbb{R}} \left ( \int_{\mathbb{R}}
+f(y-x)g(x) d\lambda(x) \right) e^{-i y \xi} d\lambda(y)
+\]
+L'application:
+\[
+(x,y) \in \mathbb{R}^2 \mapsto f(y-x)g(x)e^{-iy \xi}
+\]
+est sommable (cf démonstration dans la section sur le produit de convolution),
+le théorème de Fubini et le changement de variable $u=y-x$ donnent:
+\begin{align*}
+\mathcal{F}(f*g)(\xi) & = \int_{\mathbb{R}^2}
+f(y-x)g(x)   e^{-i (y-x) \xi}e^{-i x \xi} d\lambda(x)d\lambda(y) \\
+& = \int_{\mathbb{R}^2}
+f(u)g(x)   e^{-i u \xi}e^{-i x \xi} d\lambda(x)d\lambda(u) \\
+& \int_{\mathbb{R}}
+f(u)   e^{-i u \xi}d\lambda(u)  \int_{\mathbb{R}}g(x) e^{-i x \xi}
+d\lambda(x) = \mathcal{F}(f)(\xi).\mathcal{F}(g)(\xi)
+\end{align*}
+La propostion relative à la transformée inverse est en tout point similaire, une
+précaution étant néanmoins à prendre du fait de la présence du facteur $2\pi$.
+\end{proof}
+\section{Transformation de Fourier dans $L^2$}
+La transformation de Fourier des applications de  $L^2(\mathbb{R}^n)$ ne peut pas se faire directement
+à l'aide d'intégrales. Il faut procéder par extension en définissant
+dans un premier temps cette transformation sur une classe plus
+restreinte d'applications, stable par transformation de Fourier et dense dans 
+$L^2(\mathbb{R}^n)$. Cette classe est celle des applications indéfiniment
+dérivables à décroissance rapide que l'on va maintenant introduire, et sur
+laqulle on montrera que la transformation de Fourier est un endomorphisme.
+\begin{mandatory} 
+\begin{defn}
+Une application $f : \mathbb{R}^n \to \mathbb{C}$ est dite
+indéfiniment dérivable à décroissance rapide si~:
+\begin{itemize}
+\item $f \in C^\infty(\mathbb{R}^n)$
+\item $\forall (n,m) \in
+\mathbb{N}^2, \, \lim_{|x|\to +\infty} \left |
+x^n \frac{d^m f}{dx^m} \right | = 0$
+\end{itemize}
+\end{defn}
+\end{mandatory}
+\begin{term}
+L'ensemble des applications indéfiniment dérivables à décroissance
+rapide est appelé classe des applications de Schwartz et se note $\mathcal{S}( \mathbb{R}^n)$.
+\end{term}
+
+Il est clair que toute application de la classe $\mathcal{S}$ est
+élément de $L^p(\mathbb{R}^n)$ pour tout $p \geq 1$. On définira la
+transformée de Fourier d'une application de $\mathcal{S}$ par la
+formule intégrale vue pour les applications sommables. 
+\begin{mandatory}
+\begin{prop}
+Soit $f \in \mathcal{S}$. La transformée de Fourier de $f$ est encore
+une application de $\mathcal{S}$.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Le caractère indéfiniment dérivable s'obtient aisément à partir du
+théorème de dérivation sous le signe somme. Soit en effet un
+multi-indice $I$ de longueur $p$. On écrit, pour tout $x$~:
+\[
+D_I e^{- i \langle x, \xi \rangle} = (-i)^n \left (\prod_{i \in I} x_i
+\right )  e^{- i \langle x, \xi \rangle}
+\]
+Le terme $\prod_{i \in I} x_i$ se majore en valeur absolue par
+$(1+\|x\|^2)^p$. Comme par ailleurs il est clair que les applications
+$f(x)(1+\|x\|^2)^N$ sont sommables pour tout $N$, la dérivablité
+d'ordre quelconque est obtenue.
+En ce qui concerne la décroissance rapide, il suffit de reprendre la
+démonstration du théorème de Riemann-Lebesgue en poursuivant les
+intégrations par parties aussi loin que nécessaire (le caratère
+$C^\infty$ des applications de $\mathcal{S}$ autorisant cette opération).
+\end{proof}
+Les applications de la classe $\mathcal{S}$ étant $L^1(\mathbb{R}^n)$, la
+formule d'inversion précédemment établie est valable: la transformation de
+Fourier est inversible en tant qu'opérateur linéaire continu $\mathcal{F}$ de
+$\mathcal{S}$ dans lui-même et~:
+\[
+\mathcal{F}^{-1}(\widehat{f},x) = (2 \pi)^{-n} \int_{\mathbb{R}^n}
+\widehat{f}(\xi) e^{i\langle \xi, y\rangle} d \lambda(\xi)
+\]
+\begin{mandatory}
+\begin{prop}
+Soit $f \in \mathcal{S}$ et $\widehat{f}$ sa transformée de
+Fourier. On a~:
+\[
+ \int \|f\|^2 d \lambda = (2\pi)^{-n} \int \|\widehat{f}\|^2 d \lambda
+\]
+\end{prop}
+\end{mandatory}
+\begin{proof}
+On vérifie immédiatement que pour tout $f \in \mathcal{S}$~:
+\[
+\overline{\mathcal{F}^{-1}(\widehat{f})} = \mathcal{F}(\overline{\widehat{f}})
+\]
+La proposition annoncée est alors un cas particulier de la proposition \ref{fourier:1}
+\end{proof}
+Cette dernière proposition montre que la transformation de fourier est
+un endomorphisme quasi-isométrique de $\mathcal{S}$.
+La définition de la transformation de Fourier des applications de
+$L^2$ va se faire en utilisant la densité des applications
+de $\mathcal{S}$ dans $L^2$ (voir proposition \ref{dens:1})
+\begin{prop}
+Soit $E$ un espace métrique et $A$ une partie dense de $E$. Soit $f
+: A \to \mathbb{C}$ uniformément continue. Il existe une unique
+extension continue de $f$ à $E$ que l'on continuera à noter $f$ par
+abus de langage.
+\end{prop}
+\begin{proof}
+Pour tout $x \in E$, il existe une suite $(x_n)$ d'éléments de $A$
+avec $x = \lim_n x_n$. On définit l'extension par $f(x) = \lim_n
+f(x_n)$. La suite $x_n$ étant convergente et $f$ continue, on vérifie
+que la suite $f(x_n)$ est de Cauchy dans $\mathbb{C}$ complet, donc
+admet une limite. Montrons que cette extension est continue en tout
+point $x \in E$. Soit $\epsilon > 0$.  $f$ étant uniformément
+continue, il existe  $\eta$ tel que~:
+\[
+\forall (u,v) \in A^2, d(u,v) < \eta
+\Rightarrow |f(u)-f(v)| < \frac{\epsilon}{3}
+\]
+Par ailleurs, soit $(x_n)$ suite d'éléments de $A$ de limite $x$ et
+$(y_n)$ de limite $y$. Il existe $n_0$ tel que pour tout $n \geq n_0$,
+$d(x_n,x) < \frac{\eta}{3}$, $d(y_n,y) < \frac{\eta}{3}$ et
+$|f(x_n)-f(x)| < \frac{\epsilon}{3}$, $|f(y_n)-f(y)| <
+\frac{\epsilon}{3}$. On obtient alors $|f(x)-f(y)|< \epsilon$ pour
+$d(x,y) < \frac{\eta}{3}$.
+\end{proof}
+\begin{mandatory}
+\begin{defn}
+La transformée de Fourier est l'unique extension à $L^2$ de
+l'endomorphisme quasi-isométrique continu défini sur $\mathcal{S}$.
+\end{defn}
+\end{mandatory}
+La transformation de Fourier ainsi définie est encore un endomorphisme
+quasi-isométrique sur $L^2$ et pour tout $f \in L^2(\mathbb{R}^n)$:
+\begin{mandatory}
+\[
+ \int \|f\|^2 d \lambda = (2\pi)^{-n} \int \|\widehat{f}\|^2 d \lambda
+\]
+\end{mandatory}
+Les propriétés de la transformation de Fourier 
+relativement aux translations, changements d'échelle et dérivations partielles
+sont préservées dans $L^2(\mathbb{R}^n)$. Sous réserve du caractère $L^2$ des
+produits, la proposition relative aux produits de convolution reste elle aussi
+valable.
+ Les définitions de la transformation de Fourier dans $L^1$ et dans
+$L^2$ sont de formes très différentes. En revanche, il y a compatibilité au sens donné par la proposition suivante:
+\begin{mandatory}
+\begin{prop}
+Soit $f \in L^1(\mathbb{R}^n) \cap L^2(\mathbb{R}^n)$. Alors
+l'application:
+\[
+\widehat{f}(\xi) = \int_{\mathbb{R}^n} f(x) \exp \left(- i \langle x ,
+\xi \rangle \right) d\lambda(x)
+\]
+est égale à la transformée de Fourier de $f$ dans $L^2(\mathbb{R}^n)$
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Soit $f \in L^1(\mathbb{R}^n) \cap L^2(\mathbb{R}^n)$. On distinguera la
+transformée de Fourier de $f$ dans $L^1(\mathbb{R}^n)$ de celle dans
+$L^2(\mathbb{R}^n)$ en notant la première $\widehat{f}$ et la seconde
+$\mathcal{F}(f)$, cette convention s'appliquant uniquement à la preuve courante.
+Soit $\psi \in \mathcal{S}$ quelconque. La proposition \ref{fourier:1} donne:
+\[
+\int_{\mathbb{R}^n} \widehat{f}(\xi) \psi(\xi) d \lambda(\xi) =
+\int_{\mathbb{R}^n} f(x) \widehat{\psi}(x) d \lambda(x)
+\]
+Soit $(\phi_n)_{n \in \mathbb{N}}$ une suite d'applications de $\mathcal{S}$
+ayant pour limite $f$ dans $ L^2(\mathbb{R}^n)$. Par continuité du produit
+scalaire (conséquence immédiate de l'inégalité de Cauchy-Schwartz):
+\[
+\lim_{n \to +\infty} \int_{\mathbb{R}^n} \phi_n(x) \widehat{\psi}(x) d
+\lambda(x) = \int_{\mathbb{R}^n} f(x) \widehat{\psi}(x) d \lambda(x)
+\]
+La proposition \ref{fourier:1} donne:
+\begin{align*}
+& \lim_{n \to +\infty} \int_{\mathbb{R}^n} \phi_n(x) \widehat{\psi}(x) d
+\lambda(x) = \\
+  \lim_{n \to +\infty} \int_{\mathbb{R}^n} \widehat{\phi_n}(\xi)
+  \psi(\xi) d \lambda(\xi) = \\
+  & \int_{\mathbb{R}^n} \mathcal{F}(f)(\xi)
+  \psi(\xi) d \lambda(\xi)
+\end{align*}
+On en déduit donc:
+\[
+\int_{\mathbb{R}^n} \left(\mathcal{F}(f)(\xi)-\widehat{f}(\xi)\right)
+  \psi(\xi) d \lambda(\xi) = 0
+\]
+Puis par continuité du produit scalaire et densité de $\mathcal{S}$ dans 
+$L^2(\mathbb{R}^n)$:
+\[
+\forall g \in  L^2(\mathbb{R}^n), \quad \int_{\mathbb{R}^n} \left(\mathcal{F}(f)(\xi)-\widehat{f}(\xi)\right)
+  g(\xi) d \lambda(\xi) = 0
+\]
+prouvant ainsi que $\mathcal{F}(f)-\widehat{f}=0$ dans $L^2(\mathbb{R}^n)$.
+\end{proof}
+
+Le calcul pratique d'une transformation de Fourier dans $L^2(\mathbb{R}^n)$ est
+parfois délicat: on ne peut généralement pas utiliser de forme intégrale, mais
+uniquement des suites d'applications convergeant au sens $L^2$ vers
+l'application cible. 
+Une formule souvent utile est présentée dans l'exercice ci-dessous.
+\begin{exercice}
+Soit $f \in L^2(\mathbb{R})$. Soit $a > 0$. 
+\begin{enumerate}
+  \item Montrer que l'application $f_a = f 1_{[-a,a]}$ est sommable et que
+  $\lim_{a \to +\infty}f_a=f$ dans $ L^2(\mathbb{R})$.
+  \item En déduire que la transformée de Fourier de $f$ dans $L^2(\mathbb{R})$
+  est la limite au sens $L^2$ pour $a \to +\infty$ de la famille d'applications:
+  \[
+  \xi \mapsto \int_{[-a,a]} f(x) \exp(-ix\xi) d\lambda(x)
+  \]
+\end{enumerate}
+\end{exercice}
+\begin{rem}
+Cette formule n'apporte en soit rien de plus par rapport à la définition de la
+transformée de Fourier utilisant les applications de la classe $\mathcal{S}$. En
+revanche, si la limite:
+\[
+ \lim_{a \to +\infty} \int_{[-a,a]} f(x) \exp(-ix\xi) d\lambda(x)
+\]
+peut se calculer pour presque tout $\xi$, elle donne automatiquement un
+représentant de la classe de la transformée de Fourier de $f$. Nous
+verrons dans la suite du cours que des techniques utilisant des intégrales dans
+le plan complexe permettent souvent de calculer des intégrales
+généralisées de cette forme: beaucoup de transformations de Fourier sont
+obtenues avec cette méthode.
+\begin{exercice}
+\begin{enumerate}
+  \item Déterminer la transformation de Fourier inverse dans $L^2(\mathbb{R})$
+  de l'application $1_{[-1,1]}$.
+  \item En déduire la transformation de Fourier de l'application $\sinc$:
+  \[
+  x \in \mathbb{R} \mapsto \sinc(x) = \left\{
+  \begin{array}{cc}
+  	1 & \text{ si } x=0 \\
+  	\frac{\sin x}{x} & \text{ si } x \neq 0 
+  \end{array}
+  \right.
+  \]
+  \item Pouvez-vous en déduire que $\sinc \notin L^1(\mathbb{R})$ ?
+\end{enumerate}
+\end{exercice}
+Le caractère quasi-isométrique de la transformée de Fourier est parfois utile
+pour calculer des intégrales lorsque la fonction à intégrer est le carré d'une
+application $L^2$:
+\begin{exercice}
+Soit l'application~:
+\[
+f : x \to \left \{
+\begin{array}{ll}
+\frac{\sin^2 x }{x^2} & x \neq 0 \\
+1 & x = 0
+\end{array}
+\right .
+\]
+\begin{itemize}
+\item Montrer que $f \in L^1(\mathbb{R})$ et calculer $\widehat{f}$
+(on pourra utiliser la transformation inverse de Fourier dans
+$L^2(\mathbb{R})$ de l'application $\pi 1_{[-1,+1]}$ vue dans l'exercice
+précédent et le produit de convolution).
+\item En déduire la valeur des l'intégrales~:
+\[
+\int_{\mathbb{R}} \frac{\sin^2 x}{x^2} d \lambda(x)
+\]
+et
+\[
+\int_{\mathbb{R}} \frac{\sin^4 x}{x^4} d \lambda(x)
+\]
+\end{itemize}
+\end{exercice}
+\end{rem}

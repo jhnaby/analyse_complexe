@@ -1,0 +1,402 @@
+\chapter{Fonctions mesurables}
+\section{définitions}
+Dans l'optique de la définition de l'intégrale en utilisant le procédé de
+Lebesgue mentionné en introduction, il est nécessaire de caractériser les
+applications pour lesquelles l'image inverse d'un intervalle est une partie
+mesurable (i.e. appartient à la tribu de Borel ou à sa complétée dans le cas usuel). La
+notion correspondante, replacée dans le cadre plus large des tribus, est
+celle d'application mesurable.
+\begin{mandatory}
+\begin{defn}
+Soient $(E, \mathcal{T})$, $(F, \mathcal{F})$ deux espaces mesurables. Soit $f : E \to F$. On dira que $f$ est mesurable si 
+pour tout $A \in \mathcal{F}$, $f^{-1}(A) \in \mathcal{T}$.
+\end{defn}
+\end{mandatory}
+Cette définition peut aussi s'interpréter en considérant les propriétés des
+images réciproques:
+\begin{prop}
+Soient $(E, \mathcal{T})$, $(F, \mathcal{F})$ deux espaces mesurables et $f :
+E \to F$ une application. $f^{-1}\left( \mathcal{F} \right)$ est une
+tribu sur $E$
+\end{prop}
+\begin{proof}
+De façon évidente, $\emptyset = f^{-1}(\emptyset)$, $E=f^{-1}(F)$. Soit $A \in
+\mathcal{F}$. On a:
+\begin{align*}
+f^{-1}(A^c) & = \left \{ x \in E, \, f(x) \notin A \right \} \\
+& = \left \{ x \in E, \, f(x) \in A \right \}^c \\
+& = f^{-1}(A)^c
+\end{align*}
+On vérifie de m\^eme que pour toute famille dénombrable $(A_n)_{n \in
+\mathbb{N}}$ d'élements de $\mathcal{F}$:
+\[
+f^{-1}\left(\bigcup_{n \in \mathbb{N}} A_n\right) = \bigcup_{n \in \mathbb{N}}
+f^{-1}\left(A_n\right), \quad f^{-1}\left(\bigcap_{n \in \mathbb{N}} A_n\right)
+=
+\bigcap_{n \in \mathbb{N}} f^{-1}\left(A_n\right)\]
+prouvant que l'image réciproque commute avec les opérations pour lesquelles une
+tribu doit \^etre stable. 
+\end{proof}
+Le transport de la structure de tribu par une application n'est vrai que pour
+l'image réciproque (faire le parallèle avec les applications continues entre
+espaces topologiques). Dans le cas de l'image directe, certaines propriétés de
+stabilité ne sont pas vérifiées. On a en particulier:
+ \[
+ f\left(\bigcap_{n \in \mathbb{N}} A_n\right) \subset \bigcap_{n \in
+ \mathbb{N}} f\left(A_n\right)
+\]
+mais non l'égalité.
+On voit que dans le cas d'une application $f$ mesurable, la tribu
+$f^{-1}\left(\mathcal{F}\right)$ est incluse dans la tribu $\mathcal{T}$.
+\begin{prop}
+Soit $f \colon E \to F$ une application et $B \subset \mathcal{P}(E)$ un
+ensemble de parties de $F$. On a:
+\[
+\mathcal{T}\left(f^{-1}(B)\right) = f^{-1}\left(\mathcal{T}\left(B\right)\right)
+\]
+\end{prop}
+En d'autres termes, la tribu engendrée commute avec l'image réciproque.
+\begin{proof}
+On sait que $f^{-1}\left(\mathcal{T}\left(B\right)\right)$ est une tribu en
+vertu de la proposition précédente. Comme elle contient les images réciproques
+des éléments de $B$, on en déduit:
+\[
+\mathcal{T}\left(f^{-1}(B)\right) \subset
+f^{-1}\left(\mathcal{T}\left(B\right)\right)
+\]
+Posons:
+\[
+\mathcal{G}= \left\{ A \in F, \, f^{-1}(A) \in \mathcal{T}\left(
+f^{-1}(B)\right)\right\}
+\]
+On vérifie facilement que $\mathcal{G}$ est une tribu sur $F$, qui contient $B$
+et donc qui contient $\mathcal{T}\left(B\right)$. On en déduit l'inclusion
+réciproque:
+\[
+\mathcal{T}\left(f^{-1}(B)\right) \supset
+f^{-1}\left(\mathcal{T}\left(B\right)\right)
+\]
+\end{proof}
+\begin{mandatory}
+\begin{corollaire}(critère de mesurabilité)
+Soient $(E, \mathcal{T})$, $(F, \mathcal{F})$ deux espaces mesurables et $f :
+E \to F$ une application. Soit $B$ un ensemble de parties de $F$ engendrant la
+tribu $\mathcal{F}$. Pour que $f$ soit mesurable, il faut et il suffit que:
+\[
+\forall A \in B, \, f^{-1}(A) \in \mathcal{T}
+\]
+\end{corollaire}
+\end{mandatory}
+La preuve est une application directe de la proposition qui précéde.
+Le caractère mesurable est lié intrinséquement aux tribus de départ et
+d'arrivée: une application entre deux mêmes ensembles peut être mesurable pour
+un choix particulier de tribus et non pour un autre. Il arrive parfois que l'on
+recherche la plus grande tribu sur l'ensemble d'arrivée ou la plus petite tribu
+sur l'ensemble de départ pour laquelle une application donnée est mesurable. La
+contruction d'une tribu induite sur une partie d'un ensemble correspond à ce
+cas:
+\begin{mandatory}
+\begin{prop}
+Soit $(E, \mathcal{T})$ un espace mesurable. Soit $A \subset E$ une partie de
+$E$ et $i \colon A \hookrightarrow E$ l'injection canonique de $A$ dans $E$. La
+plus petite tribu sur $A$ rendant $i$ mesurable est l'ensemble des parties de
+$A$ de la forme $A \cap M$ avec $M \in \mathcal{T}$. Cette tribu est appelée
+tribu induite sur $A$ et sera notée $\mathcal{T}_A$.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Soit $M \in \mathcal{T}$. On remarque que $i^{-1}(M)=A \cap M$. Toute tribu sur
+$A$ pour laquelle $i$ est mesurable doit évidemment contenir ces parties. Comme
+par ailleurs l'ensemble des $A \cap M, M \in \mathcal{T}$ est une tribu, elle
+est donc la plus petite pour laquelle $i$ soit mesurable.
+\end{proof}
+\begin{mandatory}
+\begin{prop}
+Soit $(E, \mathcal{T}, \mu)$ un espace mesuré et soit $A \subset E$ une partie
+mesurable de $E$. L'application $\mu_A \colon \mathcal{T}_A \to \mathbb{R}^+$
+telle que pour tout mesurable $M \in \mathcal{T}_A$, $\mu_A(M) = \mu(M)$ est une mesure
+sur $(A, \mathcal{T}_A)$ appelée restriction de $\mu$ à $A$.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+La seule chose réellement à prouver est que $\mu_A$ est bien définie. Tout
+mesurable $M \in \mathcal{T}_A$ est de la forme $M=A \cap \tilde{M}$ avec $\tilde{M}$ mesurable de $\mathcal{T}$. Si $A$ est
+mesurable, toutes les parties de $\mathcal{T}_A$ sont éléments de $\mathcal{T}$,
+$\mu$ est donc bien définie sur de telles parties.
+\end{proof}
+On notera la nécessité d'avoir $A$ mesurable pour pouvoir définir la mesure
+restreinte.
+
+On peut appliquer le critère de mesurabilité pour montrer l'importante
+proposition suivante:
+\begin{mandatory}
+\begin{prop}
+Soient $E,F$ deux espaces topologiques munis de leurs tribus de Borel. Toute
+application continue $f \colon E \to F$ est également mesurable.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+La tribu de Borel d'un espace topologique est engendrée par les ouverts. Si $f
+\colon E \to F$ est continue, l'image réciproque de tout ouvert de $F$ est un
+ouvert de $E$. $f$ vérifie donc le critère de mesurabilité.
+\end{proof}
+\begin{rem}
+Dans le langage des probabilités, une application mesurable
+s'appelle une variable aléatoire, mais il s'agit bien du même objet
+mathématique.
+\end{rem}
+
+\begin{mandatory}
+\begin{prop}{(mesure image)}
+Soit $(E, \mathcal{T}, \mu)$ un espace mesuré et $(F, \mathcal{F})$ un
+espace mesurable. Soit $f : E \to F$ mesurable. L'application $f_* \mu
+: \mathcal{F} \to \overline{\mathbb{R}^+}$ définie par~:
+\[
+\forall A \in \mathcal{F}, \, f_* \mu (A) = \mu(f^{-1}(A))
+\]
+est une mesure appelée mesure image de $\mu$ par $f$.
+\end{prop}
+\end{mandatory}
+On notera que le caractère mesurable de $f$ est indispensable pour avoir cette
+propriété de transport des mesures. Attention à bien prendre garde aux ensembles
+de départ et d'arrivée entre définition d'une application mesurable (utilisant
+l'image réciproque) et mesure image (qui est une image directe).
+\begin{exercice}
+Soit $(E,\mathcal{T},\mu)$ un espace mesuré avec $\mu(E)<+\infty$.
+ Soit $f\colon E \to E$ une application mesurable. 
+ On dit que $f$ préserve la mesure si $\forall A \in \mathcal{T}, \mu(f^{-1}(A))=A$, et on supposera dans la suite
+  que $f$ vérifie cette propriété.
+Enfin, on notera, pour $n \geq 1$ et $A \subset E$: $f^{-n}(A)=\{x \in E \, | \, f^n(x)\in A\}$  
+avec $f^n=\underbrace{f \circ f \dots \circ f}_n$.
+\begin{enumerate}
+\item Montrer que pour tout $n \geq 1$, on a $\forall A \in  \mathcal{T}, \mu(f^{-n}(A))=A$.
+\item Pour $A \in \mathcal{T}$, on pose:
+\[
+H_A = \{ x \in A \, | \, \forall n \geq 1, f^n(x) \notin A \}
+\]
+Montrer que $H_A$ est mesurable.
+\item Montrer que pour tout $n \geq 1$, on a $f^{-n}(H_A) \cap H_A = \emptyset$.
+\item En déduire que pour tout couple d'entiers $(m,n), m \neq n$, on a:
+\[
+f^{-n}(H_A) \cap f^{-m}(H_A)= \emptyset
+\]
+\item Evaluer:
+\[
+\mu \left( \bigcup_{n \geq 0} f^{-n}(H_A) \right)
+\]
+et en déduire que $\mu(H_A)=0$. Ce résultat est connu sous le nom de théorème de récurrence de Poincaré.
+\end{enumerate}
+\end{exercice}
+
+\section{Applications mesurables à valeurs réelles}
+Dans cette partie et sauf mention contraire, les applications seront à
+valeurs dans $\overline{\mathbb{R}}$ que l'on munira de sa tribu de Borel. 
+\begin{mandatory}
+\begin{prop}
+Soit $(E, \mathcal{T})$ un espace mesurable. $f : E \to
+\overline{\mathbb{R}}$ est  mesurable relativement à la tribu de Borel si l'une
+des conditions équivalentes suivantes est vérifiée~:
+\begin{itemize}
+\item $\forall t \in \mathbb{R}, \{x \in E | f(x) \leq t \} \in
+\mathcal{T}$.
+\item $\forall t \in \mathbb{R}, \{x \in E | f(x) < t \} \in
+\mathcal{T}$.
+\item $\forall t \in \mathbb{R}, \{x \in E | f(x) > t \} \in
+\mathcal{T}$.
+\item $\forall t \in \mathbb{R}, \{x \in E | f(x) \geq t \} \in
+\mathcal{T}$.
+\end{itemize}
+\end{prop}
+\end{mandatory}
+La démonstration est laissée à titre d'exercice.
+\begin{rem}
+Dans la proposition précédente, on peut se limiter à des $t$ rationnels, en
+raison de la densité de $\mathbb{Q}$ dans $\mathbb{R}$.
+\end{rem}
+
+ Toute application croissante $f: \mathbb{R} \to \mathbb{R}$ est mesurable. En
+effet, $f^{-1}(]-\infty, x [)$ est soit vide, soit réduit à un point,
+soit un intervalle de $\mathbb{R}$.
+\begin{mandatory}
+\begin{defn}
+Une application $f : E \to \overline{\mathbb{R}}$ est dite simple si
+elle ne prend qu'un nombre fini de valeurs distinctes.Une application simple
+mesurable est appelée application étagée.
+\end{defn}
+\end{mandatory}
+
+Une application étagée est de la forme~:
+\[
+f : x \to \sum_{i=1 \dots n} \lambda_i 1_{A_i}(x)
+\]
+avec $\lambda_i \in \overline{\mathbb{R}}$ et $A_i$ mesurable (on
+rappelle que la notation $1_A$ désigne l'application indicatrice de la
+partie $A$, i.e. $1_A(x) = 1$ si $x \in A$, $1_A(x) = 0$ si $x \notin
+A$).
+
+
+
+\begin{defn}
+Soient $f,g$ deux applications de $E$ dans $\overline{\mathbb{R}}$. On
+note $f \wedge g$ l'application $x \to \min(f(x),
+g(x))$ et  $f \vee g$ l'application $x \to \max(f(x), g(x))$.
+\end{defn}
+\begin{prop}
+Si $f,g$ sont mesurables, $f\vee g $ et $f \wedge g$ sont mesurables. 
+\end{prop} 
+\begin{proof}
+Soit $t \in \mathbb{R}$. $\{ x | (f \vee g) (x) \leq t \} = \{ x |
+f(x) \leq \} \cap \{ x | g(x) \leq t \}$. Les deux ensembles étant
+mesurables par hypothèse de mesurabilité de $f$ et $g$, on en déduit
+$\{ x | (f\vee g) (x) \leq t \}$ mesurable. La démonstration pour $f
+\wedge g$ est similaire.
+\end{proof}
+\begin{mandatory}
+\begin{prop}\label{prop:3}
+Soient $f,g$ mesurables. L'ensemble $\{ x | f(x) < g(x) \}$ est mesurable.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+En vertu de la densité de $\mathbb{Q}$ dans $\mathbb{R}$, on a $f(x) <
+g(x) \Rightarrow \exists q \in \mathbb{Q} | f(x) < q < g(x)$,
+l'implication réciproque étant évidente. On en déduit~:
+\[
+\{ x | f(x) < g(x) \} = \cup_{q \in \mathbb{Q}} \{ x | f(x) < q  \}
+\cap \{x | g(x) > q \}
+\]
+d'où la mesurabilité de $\{ x | f(x) < g(x) \}$, union dénombrable
+d'ensembles mesurables.
+\end{proof}
+On vérifie aisément que $\{ x | f(x) \leq  g(x) \}$ et $\{ x | f(x)
+=  g(x) \}$ sont des ensembles mesurables.
+\begin{mandatory}
+\begin{prop}
+Soit $(f_n)_{n  \in \mathbb{N}}$ une famille d'applications mesurables. Les
+applications suivantes sont mesurables~:
+\begin{itemize}
+\item $\sup_n f_n, \inf_n f_n$.
+\item $\limsup_n f_n, \liminf_n f_n$.
+\item $\lim_n f_n$ sur son domaine de définition.
+\end{itemize}
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Soit $t \in \mathbb{R}$.
+\[
+\{ x | (\sup_n f_n)(x) \leq t \} = \cap_n \{ x | f_n(x) \leq t \}
+\]
+est mesurable comme intersection dénombrable d'ensembles mesurables
+(de même pour $\inf_n f_n$). De plus~:
+\begin{align*}
+& \limsup_n f_n = \inf_k \sup_{n
+\geq k} f_k \\
+&\liminf_n f_n = \sup_k \inf_{n \geq k} f_k
+\end{align*}
+ et le résultat
+précédent montre que ces applications sont mesurables. Le domaine de
+définition de $\lim_n f_n$ est l'ensemble $D$ des points pour lesquels
+$\limsup_n  = \liminf_n$ et est donc mesurable en vertu de la
+proposition \ref{prop:3}. Comme par ailleurs~:
+\[
+\{ x | \lim_n f_n \leq t \}  =  D \cap \{ \limsup_n f_n \leq t \}
+\]
+on a la mesurabilité de $\lim_n f_n$.
+\end{proof}
+Cette proposition montre que la mesurabilité est préservée par passage
+à la limite {\em simple}. La puissance de la théorie de l'intégration
+au sens de Lebesgue réside dans cette propriété.
+\begin{mandatory}
+\begin{prop}
+Soient $f,g$ des applications mesurables. Pour tout réel $\lambda$, l'application $\lambda f + g
+$ est mesurable.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Soit $t  \in \mathbb{R}$. On suppose tout d'abord $\lambda \geq 0$.
+\[
+\{ x | \lambda f(x) + g(x) < t \}  = \cup_{q \in \mathbb{Q}} \{ x |
+f(x) < q \lambda^{-1} \} \cap \{ x | g(x) < t - q\}
+\]
+Cet ensemble est donc mesurable.
+Si $\lambda < 0$, on modifie l'expression précédente par~:
+\[
+\{ x | \lambda f(x) + g(x) < t \}  = \cup_{q \in \mathbb{Q}} \{ x |
+f(x) > q \lambda^{-1} \} \cap \{ x | g(x) < t - q\}
+\]
+qui reste mesurable.
+\end{proof}
+\begin{mandatory}
+\begin{prop}
+Le produit de deux applications mesurables est mesurable, de même que
+le rapport de deux applications mesurables sur son domaine de définition.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Soit $f$ mesurable. Pour tout réel $t$~:
+\[
+\{x | f^2(x) < t \} = \{ x | -\sqrt(t) < f(x) < \sqrt(t) \}
+\]
+qui est mesurable, donc $f^2$ est mesurable. 
+Soit $g$ mesurable. On peut écrire~:
+\[
+fg = \frac{1}{2} [(f+g)^2 -f^2 - g^2]
+\]
+d'où $fg$ mesurable.
+L'ensemble $D = \{x | g(x) \neq 0 \} = \{ x | g(x) < 0 \} \cap \{x |
+g(x) > 0\}$ est mesurable. Le quotient $f/g$ a donc un domaine de
+définition mesurable. Par ailleurs, pour tout $t \in \mathbb{R}$~:
+\begin{align*}
+\{x \in D | \frac{f(x)}{g(x)} < t \} = & \left ( \{x \in D | f(x) < t g(x) \}
+\cap \{x \in D | g(x) > 0\} \right ) \\
+& \cup \left (\{x \in D | f(x) > t g(x) \}
+\cap \{x \in D | g(x) < 0 \} \right )
+\end{align*}
+l'ensemble $\{x \in D | \frac{f(x)}{g(x)} < t \}$ est donc mesurable.
+\end{proof}
+\begin{exercice}
+Soit $f \colon \mathbb{R} \to \mathbb{R}$ une application dérivable. On suppose
+$\mathbb{R}$ muni de sa tribu de Borel. 
+\begin{itemize}
+  \item Montrer que $f$ est mesurable.
+  \item Montrer que pour tout $\tau \in \mathbb{R}$, l'application $f_\tau
+  \colon x \in \mathbb{R} \mapsto f(x+\tau)$ est mesurable.
+  \item En déduire que la dérivée $f^\prime$ de $f$ est mesurable. 
+\end{itemize}
+\end{exercice}
+\begin{mandatory}
+\begin{prop}\label{ch2:1}
+Soit $f : E \to \overline{\mathbb{R}^+}$ une application mesurable. Il
+existe une suite croissante $(f_n)_{n \in \mathbb{N}}$ d'applications
+étagées telle que $f = \lim_n f_n$.
+\end{prop}
+\end{mandatory}
+\begin{proof}
+Pour tout entier $n$, on pose:
+\[
+f_n = \sum_{k=1}^{n2^n} \frac{k-1}{2^n} 1_{A_{n,k}} + n 1_{B_n}
+\]
+avec~:
+\[
+A_{n,k} = \{x | \frac{k-1}{2^n} \leq f(x) < \frac{k}{2^n} \}
+\]
+et~:
+\[
+B_n = E - \cup_{k=1}^{n2^n} A_{n,k} = \{x: f(x) \geq n \}
+\]
+La suite $f_n$ est une suite croissante d'applications étagées de
+limite $f$.
+\end{proof}
+Le dernier exercice proposé ici se rapproche de certaines techniques utilisées
+en théorie des probabilités.
+\begin{exercice}
+Soit $\left(\Omega, \mathcal{T}\right)$ un espace mesurable. Soit $N \colon
+\left(\Omega, \mathcal{T}\right) \to \left( \mathbb{N},
+\mathcal{P}(\mathbb{N})\right)$ une application mesurable. Soit $(f_n)_{n \in
+\mathbb{N}})$ une suite d'applications mesurables $f_n \colon \left(\Omega,
+\mathcal{T}\right) \to \left( \mathbb{R}, \mathcal{B}(\mathbb{R})\right)$.
+Montrer que les applications suivantes sont mesurables:
+\begin{itemize}
+  \item $\omega \in \Omega \mapsto f_{N(\omega)}(\omega)$
+  \item  $\omega \in \Omega \mapsto \sum_{n=0}^{N(\omega)}f_n(\omega)$
+\end{itemize}
+\end{exercice}
