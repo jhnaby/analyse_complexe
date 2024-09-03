@@ -416,17 +416,43 @@ La définition de l'holomorphie signifie que la fonction $f(z)$ est tangente en 
 \end{equation} 
 $g_{z_0}$ s'écrit comme une composition:
 \begin{equation}
-  g = T_{f(z_0)}\circ H_{f^\prime(z0)} \circ T_{z_0}^{-1}
+  g = T_{f(z_0)}\circ H_{f^\prime(z_0)} \circ T_{z_0}^{-1}
 \end{equation} 
 où, pour $a \in \C$,  $T_a$ désigne la translation par $a$ et $H_a$ l'application $\C$-linéaire $z \mapsto H_a(z) = az.$ Cette dernière 
 transformation est elle-même la composée d'une homothétie de rapport $\lvert a \rvert$ et d'une rotation de centre $0$ et d'angle $\theta$ 
 si $a=\lvert a \rvert e^{i \theta} .$ 
 On en déduit que $g_{z_0}$ conserve les angles et multiplie les longueurs par un facteur $\lvert a \rvert.$
 La même propriété est vérifié en $z_0$ par $f$ au sens suivant:
+\begin{fprop}
+  \label{prop:fprime_confo}
+Soit $z_0 \in \C$, $f$ holormorphe en $z_0$ et soient $\gamma_1, \gamma_2 \colon ]-\epsilon, \epsilon [  \to \C, \, \epsilon > 0$ deux chemins de $\C$
+de classe $C^1$ tels que $\gamma_1(0) = \gamma_2(0) = z_0.$ En posant $v_1= \gamma_1^\prime(0), v_2 = \gamma_2^\prime(0)$, on a: 
+\begin{equation}
+  \langle f^\prime(z_0) v_1, f^\prime(z_0),v_2 \rangle = \lvert f^\prime(z_0) \rvert^2 \langle v_1, v_2 \rangle
+\end{equation}
+où la notation $\langle \cdot, \cdot, \rangle$ désigne le produit scalaire euclidien de $\R^2.$
+\end{fprop}
+\begin{proof}
+  Un calcul immédiat montre la propriété suivante:
+  \begin{equation}
+    \overline{v_1}v_2 = \langle v_1, v_2 \rangle + i \det \left( v_1, v_2 \right).
+  \end{equation}
+  Or:
+  \begin{equation}
+    \overline{f^\prime(z_0)v_1}f^\prime(z_0)v_2 = \lvert f^\prime(z_0) \rvert^2 \overline{v_1}v_2.
+  \end{equation}
+  La proposition s'en déduit alors en considérant les parties réelles.
+\end{proof}
+\begin{rem}
+La proposition \ref{prop:fprime_confo} ne permet pas de conclure que le signe de l'angle entre les vecteurs $v_1,v_2$ est préservé. Ceci 
+est toutefois vrai, car la preuve ci-dessus montre aussi que:
+\begin{equation}
+  \det\left( f^\prime(z_0)v_1,f^\prime(z_0)v_2 \right) = \lvert f^\prime(z_0) \rvert^2 \det\left( v_1,v2 \right).
+\end{equation}
+\end{rem}
 
-
-En particulier, l'angle de deux vecteurs attachés au point $z_0$ est conservé par une transformation holomorphe ainsi que le rapport
- des longueurs ; ceci n'est pas généralement le cas pour une fonction différentiable dans $\R^2$ (cf. Figure~\ref{fig:nonholo})
+Cette remarquable propriété, appelée conformité, n'est généralement par vérifiée par une fonction différentiable  
+quelconque (cf. Figure~\ref{fig:nonholo}).
 
 \begin{figure}[H]
 \begin{center}
@@ -456,7 +482,8 @@ En particulier, l'angle de deux vecteurs attachés au point $z_0$ est conservé 
 \end{figure}
 
 \begin{rem}
-Certains auteurs utilisent le mot \textit{analytic} (que l'on peut traduire en français par "analytique") pour désigner une fonction holomorphe. Nous parlerons de fonctions analytiques un peu plus loin par le prisme des séries entières.
+Certains auteurs utilisent le mot \textit{analytic} (que l'on peut traduire en français par "analytique") pour désigner une fonction holomorphe. 
+Cette terminologie deviendra sera justifiée plus loin dans le cours.
 \end{rem}
 
 \subsection{Conditions de Cauchy-Riemann}
@@ -632,7 +659,7 @@ situation est générale pour des applications holomorphes dans un domaine de
 $\mathbb{C}$. 
 
 \subsection{Rayon de convergence}
-Nous supposerons connu le résultat suivant~: 
+Le résultat suivant est bien connu, et a été vu en classes préparatoires~: 
 
 \begin{fprop}\label{prop:ray_cvg}
 \`{A} chaque série entière:
@@ -641,13 +668,7 @@ correspond un nombre $R \in [0, \infty]$, tel que la série converge absolument 
 \[\frac{1}{R}=\limsup_{n \to \infty} \lvert a_n\rvert^{\frac{1}{n}}.\]
 \end{fprop}
 
-\begin{proof}
-Démontrons la convergence uniforme dans le disque fermé $\overline{B}(z_0 ; r)$, pour tout $r<R$ :
-sans perte de généralité, on supposera $z_0 = 0$ pour simplifier l'écriture.
-Soit $\alpha = \limsup_{n \to \infty } \lvert a_n\rvert^{\frac{1}{n}}$. Pour $z$ tel que $\lvert z\rvert < \frac{1}{\alpha}$, alors par continuité il existe $\epsilon > 0$ tel que $\lvert z\rvert < \frac{1}{\alpha +  \epsilon}$.
 
-Par définition de la limite supérieure, il existe $N_\epsilon$ tel que pour $n \geq N_\epsilon, \lvert a_n \rvert^\frac{1}{n} < \alpha + \frac{\epsilon}{2}$, et donc $\lvert a_n z^n \rvert < \frac{\alpha + \frac{\epsilon}{2}}{\alpha + \epsilon}$, ce dernier terme, indépendant de $z$, étant celui d'une suite géométrique convergente.
-\end{proof}
 
 \begin{figure}[H]
 \begin{center}
@@ -675,15 +696,7 @@ Par définition de la limite supérieure, il existe $N_\epsilon$ tel que pour $n
 \end{center}
 \end{figure}
 
-
-
-\begin{fprop}(critère de Hadamard)
-Le rayon de convergence $r$ d'une série entière $\sum_{n \geq 0} a_n z^n$ est
-donné par:
-\[
-r^{-1}=\limsup_{n \to +\infty} |a_n|^{\frac{1}{n}}
-\]
-\end{fprop}
+x
 \begin{proof}
 On suppose que: 
 \[
@@ -703,8 +716,8 @@ et donc, pour tout $n \geq N$:
 \]
 Le terme $|a_nz^n|$ est borné par le terme général d'une série géométrique
 convergente, on  en déduit l'absolue convergence de la série entière.
-De même, si $|z|> \alpha^{-1}$, le même raisonnement montre que le terme
-$\left|a_nz^n\right|$ est divergent. Si $\alpha = +\infty$, il existe pour tout
+De même, si $|z|> \alpha^{-1}$, le même raisonnement montre que la série de terme général
+$\left|a_nz^n\right|$ est divergente. Si $\alpha = +\infty$, il existe pour tout
 réel $K>0$ et tout entier $N$ un entier $n$ tel que $|a_n|>K^n$, et donc aucun
 rayon de convergence non nul ne peut exister pour la série entière. Enfin, si
 $\alpha = 0$, pour tout $\epsilon > 0$, il existe un entier $N$ tel que pour

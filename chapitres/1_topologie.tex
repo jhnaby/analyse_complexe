@@ -310,7 +310,10 @@ On remarquera tout d'abord que $\limsup_n  x_n, \liminf_n x_n$ sont bien défini
 $\R$ est un espace complet.
 \end{fprop}
 \begin{proof}
-Soit $(x_n)_{n \in \N}$ une suite de Cauchy. Elle est donc bornée et les réels:  $\limsup_n  x_n, \liminf_n x_n$ sont bien définis. Pour tout $\epsilon > 0$, il existe un entier $N_\epsilon$ tel que pour tout couple $(m,n)$ d'entiers supérieurs à $N_\epsilon$, $|x_n-x_m| < \epsilon$. Par définition des limites supérieures et inférieures, il existe également un entier $M_\epsilon$ (resp. $P_\epsilon$) tel que $x_p > \liminf_n x_n - \epsilon, p \geq M_\epsilon$ (resp. $x_q < \limsup_n x_n +  \epsilon, q \geq P_\epsilon$. Soit $p,q$ deux entiers supérieurs à $\sup \{ N_\epsilon, M_\epsilon, P_\epsilon\}$. Par l'inégalité triangulaire il vient:
+Soit $(x_n)_{n \in \N}$ une suite de Cauchy. Elle est donc bornée et les réels:  $\limsup_n  x_n, \liminf_n x_n$ sont bien définis.
+ Pour tout $\epsilon > 0$, il existe un entier $N_\epsilon$ tel que pour tout couple $(m,n)$ d'entiers supérieurs
+  à $N_\epsilon$, $|x_n-x_m| < \epsilon$. Par définition des limites supérieures et inférieures, 
+  il existe également un entier $M_\epsilon$ (resp. $P_\epsilon$) tel que $x_p > \liminf_n x_n - \epsilon, p \geq M_\epsilon$ (resp. $x_q < \limsup_n x_n +  \epsilon, q \geq P_\epsilon$). Soit $p,q$ deux entiers supérieurs à $\sup \{ N_\epsilon, M_\epsilon, P_\epsilon\}$. Par l'inégalité triangulaire il vient:
 \[
 \left |\limsup_n x_n - \liminf_n x_n \right | \leq 
 \left| \limsup_n x_n - x_p\right | + \left| x_p - x_q\right | + 
