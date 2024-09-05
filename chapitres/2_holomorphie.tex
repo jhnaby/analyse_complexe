@@ -55,6 +55,27 @@ et donc par passage à la limite:
 \]
 prouvant ainsi que $L$ est l'application nulle.
 \end{proof}
+\begin{fprop}
+  \label{prop:der_compo}
+Soient $E,F,G$ trois espaces vectoriels normés et $f \colon E \to F$,$g \colon F \to G$ deux applications. Si $f$ est différentiable en $x_0 \in E$ et $g$ 
+est différentiable en $f(x_0)$, alors $g \circ f$ est différentiable en $x_0$ et:
+\begin{equation}
+  \left( g \circ f \right)^\prime(x_0) = g^\prime\left( f(x_0) \right) \circ f^\prime(x_0)
+\end{equation} 
+\end{fprop}
+\begin{proof}
+  Il existe un voisinage ouvert $U$ de $x_0$ tel que:
+  \begin{equation}
+    \forall x \in U, \, f(x) = f(x_0) + f^\prime(x_0)\left( x-x_0 \right) + o\left( \| x - x_0 \| \right)
+  \end{equation}
+De même, il existe un voisinage ouvert $V$ de $f(x_0)$ tel que:
+  \begin{equation}
+    \forall y \in V, \, g(y) = g\left( f(x_0) \right)+ g^\prime \left( f(x_0) \right)\left( y-f(x_0) \right) + o\left( \| y - f(x_0) \| \right)
+  \end{equation}
+  $f$ étant dérivable en $x_0$, elle y est continue, ce qui assure l'existence d'un voisinage ouvert $W$ de $x_0$ tel que $f(W) \subset V.$ 
+    Soit $\epsilon > 0$. Il existe par définition de la dérivabilité 
+\end{proof}
+
 \subsection{Différentiabilité d'une application de $\R^2$ dans $\R^2$}
 \begin{fdefn}\label{def:1.2}
 Soit $U \subset \R^2$ un ouvert et soit une application $f \colon U \to \R^2$.
