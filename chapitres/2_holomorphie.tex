@@ -2,13 +2,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Holomorphie}
 La notion de dérivée d'une fonction dans le plan complexe est définie dans ce chapitre. Il sera montré plus loin qu'une application différentiable dans $\C$ possède des propriétés très particulières.
-
-\section{Fonction d'une variable complexe}
-Une fonction d'une variable complexe se définit de manière assez similaire à une fonction d'une variable réelle. Si $D$ est un domaine de $\C$, une fonction $f$ sur $D$ assigne à chaque $z \in D$ un nombre complexe $w$ appelé image de $z$ par $f$. On peut écrire $w = f(z) = u+iv$
-
 \section{Rappels de calcul différentiel}
 
-\subsection{Différentiabilité d'une application entre deux espaces vectoriels}
+\subsection{Différentiabilité d'une application entre deux espaces vectoriels normés}
 
 De façon générale, la différentiabilité en un point $x_0$ d'une application $f$ entre espaces vectoriels normés se traduit par l'existence d'un modèle affine continu approchant $f$ au voisinage de $x_0$.
 \begin{defn}
@@ -32,6 +28,7 @@ Soient $E,F$ deux espaces vectoriels normés sur un corps $\mathbb{K}$
  \[
  \forall x \in U \cap V, \, f(x) = f(x_0) + L(x-x_0) + o(\|x-x_0\|_E)
  \]
+ L'application $L$ sera le plus souvent notée $f^\prime(x_0)$ ou $Df(x_0).$
 \end{fdefn}
 \begin{rem}
 La continuité de $L$ n'est pas une conséquence de la linéarité comme en dimension finie. 
@@ -55,6 +52,18 @@ et donc par passage à la limite:
 \]
 prouvant ainsi que $L$ est l'application nulle.
 \end{proof}
+\begin{fprop}\label{prop:1.1}
+  Soit $E,F$ des espaces vectoriels normés et $U \subset E$ un ouvert. 
+Si $f \colon U \to E$ est différentiable en $x_0$, alors $f$ est continue en $x_0$.
+\end{fprop}
+\begin{proof}
+Soit $\epsilon > 0$. Il existe un $\delta >0$ tel que :
+\[ \forall x \in B(x_0,\delta), \, \lvert f(x) - f(x_0) -f^\prime(x_0)\cdot(x-x_0) \rvert \leq \epsilon \|x-x_0\|.\]
+Par un argument classique,
+\[\lvert f(x) -f(x_0)\rvert \leq \left(\epsilon + \|f^\prime(x_0)\| \right)\lvert (x-x_0) \rvert,\]
+où $\|f^\prime(x_0)\|$ est la norme de l'application linéaire continue $f^\prime(x_0)$, c.-à-d. 
+\[ \|f^\prime(x_0)\| = \sup_{v \neq 0} \frac{\|f^\prime(x_0) \cdot v\|}{\|v\|}.\]
+\end{proof}
 \begin{fprop}
   \label{prop:der_compo}
 Soient $E,F,G$ trois espaces vectoriels normés et $f \colon E \to F$,$g \colon F \to G$ deux applications. Si $f$ est différentiable en $x_0 \in E$ et $g$ 
@@ -73,70 +82,111 @@ De même, il existe un voisinage ouvert $V$ de $f(x_0)$ tel que:
     \forall y \in V, \, g(y) = g\left( f(x_0) \right)+ g^\prime \left( f(x_0) \right)\left( y-f(x_0) \right) + o\left( \| y - f(x_0) \| \right)
   \end{equation}
   $f$ étant dérivable en $x_0$, elle y est continue, ce qui assure l'existence d'un voisinage ouvert $W$ de $x_0$ tel que $f(W) \subset V.$ 
-    Soit $\epsilon > 0$. Il existe par définition de la dérivabilité 
+Pour $x \in W$, on a donc:
+\begin{equation}
+  g \circ f (x) = g \circ f (x_0) +g^\prime \left( f(x_0) \right)\left( f(x)-f(x_0) \right) + o\left( \| f(x) - f(x_0) \| \right)
+\end{equation}
+Le terme $g^\prime \left( f(x_0) \right)\left( f(x)-f(x_0) \right)$ s'écrit $g^\prime \left( f(x_0) \right)f^\prime(x_0)\left( x-x_0 \right)
++ o\left( \| x-x_0\| \right)$ et le terme $o\left( \| f(x) - f(x_0) \| \right)$ est un $o\left( \| x-x_0\| \right)$, car il existe un 
+voisinage $\tilde{W} \subset W$ de $x_0$ pour lequel:
+\begin{equation}
+  \left \| f(x) - f(x_0)\right \| \leq \left( \|f^\prime(x_0)\| + 1 \right) \left \| x-x_0 \right \|.
+\end{equation}
+On en déduit que:
+\begin{equation}
+  g \circ f (x) = g \circ f (x_0) +g^\prime \left( f(x_0) \right)f^\prime(x_0)\left( x-x_0 \right) + o\left( \| x - x_0 \| \right),
+\end{equation}
+ce qui termine la preuve.
 \end{proof}
-
-\subsection{Différentiabilité d'une application de $\R^2$ dans $\R^2$}
-\begin{fdefn}\label{def:1.2}
-Soit $U \subset \R^2$ un ouvert et soit une application $f \colon U \to \R^2$.
-On dira que $f$ est différentiable en $z_0 \in U$ si il existe une application $\R$-linéaire $ L \colon \R^2 \to \R^2$ telle que :
-\[f(z)=f(z_0) + L(z-z_0) + o(\|z-z_0\|_E),\]
-\end{fdefn}
-
-
-%On a nécessairement $A(x_0)=f(x_0)$. En effet, par définition de l'ensemble $o(\|x-x_0\|)$, il existe un voisinage $U$ de $x_0$ tel que:
-%\[
-%\forall x \in U, \, \|f(x)-A(x)\| \leq \|x-x_0\|
-%\]
-%et la propriété s'ensuit en prenant $x=x_0$.
-
-
-
-%On fait le plus souvent l'abus de notation consistant à confondre \textbf{l'ensemble} $ o(\|x-x_0\|)$ avec un de ses éléments, pour écrire la relation entre $f$ et $H$  au voisinage de $x_0$ sous la forme:
-%\[
-%f(x) = f(x_0) + H(x-x_0) + o(\|x-x_0\|)
-%\]
-%Cette notation est la plus courante, mais se révèle parfois source d'erreurs: il faut toujours garder à l'esprit
-%que le terme $o(\|x-x_0\|)$ est en fait une \textbf{fonction} négligeable devant $\|x-x_0\|$ au voisinage de $x_0$.
-On notera le plus souvent $L$ par $Df(z_0)$ ou $f^\prime(z_0)$ ; il faut garder à l'esprit que ces notations désignent des applications linéaires.
-%
-%Lorsqu'une application est différentiable en un point, elle y est bien représentée par une application linéaire et hérite de certaines de ses propriétés, dont la continuité, comme le montre la proposition ci-dessous:
-\begin{fprop}\label{prop:1.1}
-Si $f \colon U \to \R^2$ est différentiable en $z_0$, alors $f$ est continue en $z_0$.
-\end{fprop}
-\begin{proof}
-Soit $\epsilon > 0$. Il existe un $\delta >0$ tel que :
-\[ \forall z \in D(z_0,\delta), \, \lvert f(z) - f(z_0) -Df(z_0)\cdot(z-z_0) \rvert \leq \epsilon \|z-z_0\|.\]
-Par un argument classique,
-\[\lvert f(z) -f(z_0)\rvert \leq \left(\epsilon + \|Df(z_0)\| \right)\lvert (z-z_0) \rvert,\]
-où $\|Df(z_0)\|$ est la norme de l'application linéaire, c.-à-d. 
-\[ \|Df(z_0)\| = \sup_{v \neq 0} \frac{\|Df(z_0) \cdot v\|}{\|v\|}.\]
-\end{proof}
-
-Lorsqu'une application est différentiable en tout point d'un ouvert $U$, on dit plus simplement qu'elle est différentiable sur $U$. Il est alors d'usage de noter l'application linéaire tangente à $f$ en $z$ par $f^\prime(z)$. On définit ainsi, une application $z \mapsto f^\prime(z)$, que nous noterons simplement $f^\prime$ : 
-\[ f^\prime \colon  U \mapsto \mathcal{L}(\R^2 ; \R^2)\]
-de l'ouvert $U$ dans l'ensemble $\mathcal{L}(\R^2 ; \R^2)$ des endomorphismes linéaires de $\R^2$. C'est par définition, \textit{l'application dérivée} de $f$. Il est alors possible d'étudier la continuité de $f^\prime$ en munissant l'espace vectoriel des endomorphismes de $\R^2$ de la norme d'opérateur définie ci-dessus.
-
 
 \begin{fdefn}
-L'application $f \colon U \to \R^2$ est dite continûment différentiable sur $U$, ou de classe $C^1$ si
-\begin{enumerate}
-\item $f$ est différentiable dans $U$, c.-à-d. différentiable en tout point de $U$ ;
-\item l'application dérivée $f^\prime \colon U \to \mathcal{L}(\R^2 ; \R^2)$ est continue.
-\end{enumerate}  
+  \label{def:application_derivee}
+  Soit $E,F$ deux espaces vectoriels normés et $U \subset E$ un ouvert. Soit $f \colon U \to F$ une application
+  différentiable en tout point de $U$. L'application:
+  \begin{equation}
+    f^\prime \colon x \in U \mapsto f^\prime(x) \in \mathcal{L}(E;F)
+  \end{equation}
+  est appelée application dérivée de $f$.
 \end{fdefn}
 
-Pour conclure cette section, mentionnons une propriété importante d'un domaine $\Omega$
-\begin{fprop} Soit $f$ une application qui est $C^1$ sur un domaine $\Omega \subset \C$. Si sa dérivée $f^\prime$ est identiquement nulle dans $\Omega$, alors $f$ est constante.
-\end{fprop}
+\begin{fdefn}
+Avec les notations de la définition \ref{def:application_derivee}, on dira que $f$ est continûment différentiable sur $U$ si 
+l'application dérivée $f^\prime$ est continue en tout point de $U$. On notera cette propriété par $f \in C^1(U).$
+\end{fdefn}
 
-Si un ouvert $U$ n'est pas connexe, par exemple la réunion de deux ouverts connexes non-vides et disjoints $U_1$ et $U_2$, alors une fonction $C^1$ constante sur chacune des composantes connexes, mais avec des valeurs différentes, aura sa dérivée nulle sur $U$. En quelque sorte, il est toujours possible de considérer de façon indépendante, le comportement d'une fonction sur chacune des composantes connexes de son ouvert de définition. 
-
-
+\begin{prop}
+  \label{prop:borne_accroissement}
+Soit $F$ un espace vectoriel normé et $f \colon [0,1] \to F$ une application continue et différentiable sur $]0,1[$ telle qu'il existe
+$K> 0$ vérifiant:
+\begin{equation}
+  \forall t \in ]0,1[, \, \| f^\prime(t) \| \leq K.
+\end{equation}
+Alors:
+\begin{equation}
+  \| f(1)-f(0) \| \leq K.
+\end{equation}
+\end{prop}
+\begin{proof}
+Soit $\epsilon > 0$ et $A_\epsilon$ la partie de $\R$ définie par:
+\begin{equation}
+  A_\epsilon = \{ t \in [0,1], \, \|f(t)-f(0) \| \leq (K+\epsilon) t \}.
+\end{equation}
+$A_\epsilon$ est bornée, donc $t_0= \sup A_\epsilon$ existe. Supposons $t_0 < 1$. Par définition du $\sup$, on a :
+\begin{equation}
+  \|f(t_0+\eta)-f(0) \| > (K+\epsilon) (t_0 + \eta), \, \eta \in ]0,1-t_0],
+\end{equation}
+et par passage à la limite $\eta \to 0$:
+\begin{equation}
+  \|f(t_0)-f(0) \| \geq (K+\epsilon) t_0
+\end{equation}
+Toujours avec $\eta \in ]0,1-t_0]$, il vient:
+\begin{align}
+  \left \| f(t_0+\eta)-f(t_0)  \right \| & \geq \lvert\left \| f(t_0+\eta)-f(0) \right \| - \left \| f(t_0) - f(0) \right \| \rvert \\
+  & > (K+\epsilon)(t_0+\eta) - (K+\epsilon)t_0 \\
+  & > (K+\epsilon)\eta. 
+\end{align}
+Par ailleurs, en utilisant l'inégalité triangulaire:
+\begin{equation}
+  \left \| f(t_0+\eta)-f(t_0)  \right \| \leq \left \| f^\prime(t_0)\right \|\eta + \lvert o(\eta) \rvert.
+\end{equation}
+En passant à la limite $\eta \to 0$:
+\begin{equation}
+  \left \| f^\prime(t_0)\right \| \geq (K+\epsilon)
+\end{equation}
+Ce qui contredit l'hypothèse sur  $\left \| f^\prime\right \|.$ On a donc $t_0=1$ et la proposition s'ensuit en faisant $\epsilon \to 0.$
+\end{proof}
+De cette proposition on déduit la suivante.
+\begin{fthm}[Accroissements finis]
+  \label{thm:accroissements_finis}
+Soient $E,F$ deux espaces vectoriels normés et $U\subset E$ un ouvert. Soit $f \colon U \to F$ une application différentiable sur $U.$
+Si le segment $[x,y]$ est inclus dans $U$ et si $K=\sup_{z \in [x,y]} \|f^\prime(z)\|$ existe, alors:
+\begin{equation}
+  \| f(y)-f(x) \| \leq K \|y-x\|.
+\end{equation}
+\end{fthm}
+\begin{proof}
+Il suffit d'appliquer la proposition \ref{prop:borne_accroissement} à:
+\begin{equation}
+  g \colon t \in [0,1] \mapsto f(t x + (1-t)y).
+\end{equation}
+\end{proof}
+\begin{fcor}
+  Avec les notations précédentes, si $U$ est connexe et si $f^\prime=0$, alors $f$ est constante.
+\end{fcor}
+\begin{proof}
+En appliquant le théorème \ref{thm:accroissements_finis}, il est clair que $f$ est constante sur toute boule ouverte contenue dans $U.$
+Soit $x_0 \in U$ et soit l'ensemble:
+\begin{equation}
+  A = \{ x \in U, \, f(x) = f(x_0) \}.
+\end{equation}
+Si $x \in A$, alors il existe une boule ouverte $B(x,\eta)$ contenue dans $U$. $f$ y est constante et donc $B(x,\eta) \subset A.$ On
+en déduit que $A$ est un ouvert. Soit maintenant $(x_n)_{n \in N}$ une suite de points de $A$ de limite $x.$ Par continuite de $f$,
+$f(x) = f(x_0)$  et $x \in A$. $A$ est donc un fermé. Par connexité de $U$, $A=U.$
+\end{proof}
 %\subsection{Interprétation géométrique}
 %
 %Un endomorphisme de $\R^2$ se représente comme une transformation du plan. Étant linéaire, elle agira sur un segment de droite pour donner un autre segment de droite. La figure \ref{fig:trlin} donne un exemple de l'action d'un endomorphisme du plan sur une grille uniforme ; on notera en particulier que la déformation préserve les parties droites.
-%\begin{figure}[ht]
+%\{begin}{figure}[ht]
 %\centering
 %\begin{subfigure}[b]{0.45\textwidth}
 %\includegraphics[width=\textwidth]{images/ima1.png}
@@ -175,23 +225,25 @@ Si un ouvert $U$ n'est pas connexe, par exemple la réunion de deux ouverts conn
 %\end{figure}
 %
 \subsection{Inversion locale}
-
+Dans toute cette section $E,F$ sont des espaces vectoriels normés.
 \begin{fdefn}\label{def:diffeo}
-Soient $U$ et $V$ deux ouverts de $\R^2$. On dit que $f \colon U \to V$ est un difféomorphisme de classe $C^1$ (ou $C^1$-difféomorphisme) 
+Soient $U\subset E$ et $V \subset F$ deux ouverts. On dit que $f \colon U \to V$ est un difféomorphisme de classe $C^1$ (ou $C^1$-difféomorphisme) 
 si $f$ est bijective, de classe $C^1$ et si en outre l'application réciproque $g=f^{-1} \colon V \to U$ est de classe $C^1$
 \end{fdefn}
 
 \emph{Attention} : une application de classe $C^1$ peut être un homéomorphisme sans être un difféomorphisme de classe $C^1$ ; autrement dit l'application réciproque n'est pas nécessairement de classe $C^1$.
 
-Il résulte du théorème de différentiation des applications composées que pour tout point $a \in U$ et $b=f(a)$, on a $g^\prime(b) \circ f^\prime(a)=f^\prime(a) \circ g^\prime(b) = \text{Id}_{\R^2}$ de sorte que les applications linéaires $g^\prime(b)$ et $f^\prime(a)$ sont inverses l'une de l'autre, donc des isomorphismes d'espaces vectoriels. En fait,nous avons un résultat plus fort :
+Il résulte du théorème de différentiation des applications composées que pour tout point 
+$x \in U$ et $y=f(a)$, on a $g^\prime(y) \circ f^\prime(x)= \text{Id}_E, _, f^\prime(x) \circ g^\prime(y) = \text{Id}_F$ de sorte que les applications linéaires $g^\prime(b)$ et $f^\prime(a)$ 
+sont inverses l'une de l'autre, donc des isomorphismes d'espaces vectoriels. 
 
-\begin{fprop}
-  \label{prop:homeo_diffeo}
-   Soient $U$ et $V$ deux ouverts de $\R^2$, et $f \colon U \to V$ un homéomorphisme de classe $C^1$. Pour que $f$ soit un difféomorphisme de classe $C^1$, il faut et il suffit que, pour tout $x \in U$, $f^\prime(x)$ soit un isomorphisme d'espaces vectoriels.
-\end{fprop}
+% En fait,nous avons un résultat plus fort :
 
-Il est possible de s'affranchir de l'hypothèse imposant à $f$ d'être un homéomorphisme sous réserve de raisonner localement et 
-d'introduire une notion de différentiabilité plus forte.
+% \begin{fprop}
+%   \label{prop:homeo_diffeo}
+%    Soient $U$ et $V$ deux ouverts de $\R^2$, et $f \colon U \to V$ un homéomorphisme de classe $C^1$. Pour que $f$ soit un difféomorphisme de classe $C^1$, il faut et il suffit que, pour tout $x \in U$, $f^\prime(x)$ soit un isomorphisme d'espaces vectoriels.
+% \end{fprop}
+
 
 % \begin{fthm}
 % Soit $U$ un  ouvert de $\R^2$ et soit $f \colon U \to \R^2$ une application de classe $C^1$. Supposons que, en un point $a \in U$, l'application dérivée $f^\prime(a)$ est un isomorphisme. Alors il existe un voisinage ouvert $W$ de $a$ ($W \subset U$) et un voisinage ouvert $V$ de $b=f(a)$, tels que $f$ soit un $C^1$-difféomorphisme de $W$ sur $V$.
@@ -203,16 +255,18 @@ d'introduire une notion de différentiabilité plus forte.
 %   on imposera souvent une condition plus forte que la différentiabilité simple. 
 
 \begin{fdefn}\label{def:strict_diff}
-Soit $f \colon \Omega \to \R^2$. On dira que $f$ est strictement différentiable en $x_0 \in \Omega$ si l'on peut trouver un voisinage $V$ de $x_0$ et une application linéaire $H$ tels que:
+Soit $U \subset E$ un ouvert et $f \colon U \to F$. On dira que $f$ est strictement différentiable en $x_0 \in U$ si l'on peut trouver
+ un voisinage $V$ de $x_0$ et une application linéaire $H$ tels que:
 \[
 \forall (x,y) \in V^2, \, f(y) = f(x) + H(y-x) + o_{x_0}\left(\|y-x\|\right)
 \]
 \end{fdefn}
 
-La différentiabilité stricte implique la différentiabilité simple, il suffit pour cela de considérer des couples de la forme $(x,x_0)$, mais la réciproque est fausse. L'intérêt majeur d'introduire cette notion réside dans le théorème suivant, dit d'inversion locale.
+La différentiabilité stricte implique la différentiabilité simple, il suffit pour cela de considérer des couples de la forme $(x,x_0)$,
+ mais la réciproque est fausse. L'intérêt majeur d'introduire cette notion réside dans le théorème suivant, dit d'inversion locale.
 
 \begin{fthm}
-Soit $f \colon \Omega \to \R^2$ une application strictement différentiable en $x_0 \in \Omega$. 
+Soit $E,F$ deux espaces de Banach, $f \colon E \to F$ une application strictement différentiable en $x_0$. 
 Si $f^\prime(x_0)$ est inversible, alors il existe un voisinage ouvert $U$ de $x_0$ et un voisinage ouvert $W$ de $f(x_0)$ 
 tels que $f$ soit un homéomorphisme de $U$ sur $W$. De plus, $f^{-1}$ est strictement dérivable en $f(x_0)$ et on 
 a $\left( f^{-1} \right)^\prime(f(x_0)) = \left(f^{\prime}\right)^{-1}(x_0)$.
@@ -346,63 +400,66 @@ Le second terme est majoré par la même quantité, on a donc:
 montrant la stricte différentiabilité de $f$ en $x_0$.
 \end{proof}
 La proposition précédente est locale: on peut supposer la différentiabilité au voisinage de $x_0$ et la 
-continuité de $f^\prime$ en ce point pour assurer la strict différentiabilité en $x_0$.
+continuité de $f^\prime$ en ce point pour assurer la stricte différentiabilité en $x_0$.
 
 
 
 \subsection{Calcul différentiel en coordonnées cartésiennes}
 
 Les définitions et résultats énoncés ci-dessus sont intrinsèques, car ils ne ne dépendent pas du choix 
-d' une base de $\R^2$, et peuvent être étendus aux espaces de Banach (espaces vectoriels normés complets).
-Cependant, le calcul explicite de l'application dérivée se fera presque toujours en utilisant des coordonnées, ce qui motive
+d' une base. Lorsque l'on travaille dans des espaces vectoriels de dimension finie, le calcul explicite de l'application dérivée se fera presque toujours en utilisant des coordonnées, ce qui motive
 la définition suivante. 
 
 \begin{defn}
-Soit une application $f \colon U \to \R^2$. Soit $a$ un point de $U$ et soit $v$ un vecteur de $\R^2$. L'application $t \mapsto f(a+t v)$ est définie sur un ouvert de $\R$ contenant l'origine et à valeurs dans $\R^2$. Nous dirons que $f$ est \textit{dérivable dans la direction} du vecteur $v$, si la limite 
+Soit une application $f \colon \R^n \to \R^m$. Soit $a$ un point de $\R^n$ et soit $v$ un vecteur de $\R^n$. L'application $t \mapsto f(a+t v)$ est définie sur un ouvert de $\R$ 
+contenant l'origine et à valeurs dans $\R^m$. Nous dirons que $f$ est \textit{dérivable dans la direction} du vecteur $v$, si la limite 
 \[\lim_{t \rightarrow 0, t \neq 0} \frac{f(a+tv)-f(a)}{t}\]
 existe. Lorsqu'elle existe, cette limite est appelée \textit{dérivée directionnelle} de $f$ au point $a$ dans la direction du vecteur $v$, et notée $L_v f(a)$. Lorsque $f$ est différentiable en $a$, alors
 \[L_v f(a)=f^\prime(a) \cdot v.\]
 \end{defn}
 
-
-Une application peut avoir des dérivées directionnelles dans toutes les directions, sans être pour autant différentiable au point considéré. L'exemple classique est l'application $f \colon \R^2 \to \R$ définie par
+Une application peut avoir des dérivées directionnelles dans toutes les directions, sans être pour autant différentiable au point considéré.
+ L'exemple classique est l'application $f \colon \R^2 \to \R$ définie par
 \[f(x,y) = \begin{cases} \frac{x(x^2-3 y^2)}{x^2 + y^2} & \text{si} (x,y) \neq (0,0) \\
 0 &  \text{si} (x,y)= (0,0).
 \end{cases}\]
 En effet, pour tout vecteur $v=(v_x, v_y)$, nous obtenons que $D_v f(0,0) = f(v_x,v_y)$. Mais comme cette fonction n'est pas une forme linéaire, elle ne peut pas s'écrire sous la forme $f^\prime(0,0) \cdot v$, et donc $f$ n'est pas différentiable en l'origine. 
 
-Soit $(x_1,x_2)$ un système de coordonnées cartésiennes sur $\R^2$ et soit $U$ un ouvert de $\R^2$. On note $(e_1, e_2)$ la base canonique de $\R^2$. Une application $f \colon U \to \R^2$ peut donc se noter comme une application de deux variables $(x_1,x_2) \mapsto f(x_1,x_2)$. La \textit{dérivée partielle} de $f$ par rapport à sa première variable, ou par rapport à $x_1$, au point $a$ est la dérivée directionnelle de $f$ au point $a$ dans la direction du vecteur $e_1$. Elle est notée  $f^\prime_{x_1} (a)$ ou $\partial_{x_1} f (a)$. De même, on définit la dérivée partielle de $f$ par rapport à sa seconde variable, ou par rapport à $x_2$, au point $a$, par la dérivée directionnelle de $f$ au point $a$ dans la direction du vecteur $e_2$. 
-
-On dira qu'une dérivée partielle de $f$ existe sur un ouvert $U$, si elle existe en tout point de $U$. Pour dériver par rapport à une variable, on considère que toutes les autres sont des constantes et on dérive, comme on a l'habitude, par rapport à la variable qui nous intéresse.
+Soit $(x_1,\dots,x_n)$ un système de coordonnées cartésiennes sur $\R^n$ relativement à une base $(e_1,\dots,e_n).$  
+  La \textit{dérivée partielle} de $f$ par rapport à par rapport à $x_i,i=1\dots n$, au point $a$ 
+  est la dérivée directionnelle de $f$ au point $a$ dans la direction du vecteur $e_i$.
+   Elle est notée $\partial_{x_i} f (a)$. 
+On dira qu'une dérivée partielle de $f$ existe sur un ouvert $U$, si elle existe en tout point de $U$.
+ Pour dériver par rapport à une variable, on considère que toutes les autres sont des constantes et on dérive, comme on en a l'habitude,
+  par rapport à la variable qui nous intéresse.
 
 \begin{prop}
-Si l'application $f \colon U \to \R^2$ est différentiable au point $a=(a_1,a_2) \in U$, alors toutes les dérivées partielles de $f$ existent au point $a$ et pour tout $v = (v_1,v_2) \in \R^2$ on a
-\[f^\prime (a) \cdot v = \partial_{x_1}f(a) v_1 + \partial_{x_2}f(a)v_2.\]
+Si l'application $f \colon \R^n \to \R^m$ est différentiable au point $a$, alors toutes les dérivées partielles de $f$ existent
+ au point $a$ et pour tout $v = (v_1,\dots, v_n) \in \R^n$ on a
+\[f^\prime (a) \cdot v = \sum_{i=1}^n \partial_{x_i}f(a) v_i\]
 Autrement dit :
-\[f^\prime (a) = \partial_{x_1}f(a) e^\ast_1 + \partial_{x_2}f(a)e^\ast_2.\]
-où $(e_1^\ast, e_2^\ast)$ est la base duale de la base canonique. 
+\[f^\prime (a) = \sum_{i=1}^n \partial_{x_i}f(a) e^\ast_i .\]
+où $(e_1^\ast,\dots, e_n^\ast)$ est la base duale de la base $(e_1,\dots,e_n).$
 \end{prop}
 
 Il importe de noter que $f^\prime_{x_1} (a)$ et $f^\prime_{x_2} (a)$ appartiennent à $\mathcal{L}(\R, \R^2)$. Or, en raison de l'isomorphisme canonique entre $\mathcal{L}(\R, \R^2)$ et $\R^2$ \footnote{L'isomorphisme consiste à associer à un vecteur $v \in \R^2$, l'application linéaire $\lambda \mapsto \lambda v$ de $\R$ dans $\R^2$.}, ces différentielles s'identifient à un vecteur de $\R^2$. Plus précisément, la fonction $f$ peut s'écrire comme le couple $f=(f_1,f_2)$ où les $f_i$ sont des fonctions de $U$ dans $\R$. Dans ce cas, les dérivées partielles s'identifient à des nombres réels qui ne sont autres que des dérivées classiques de fonctions réelles. On définit donc en chaque point $a \in U$ et pour $i=1,2$, un vecteur $(\partial_{x_1} f_i (a),\partial_{x_2} f_i (a)) \in \R^2$, appelé le gradient de $f_i$ en $a$ et noté $\nabla f(a)$.   
 
-\begin{definition}	Soit $U \subset \R^2$ un ouvert et soit $f \colon U \to \R^2$ une application différentiable en $a$. On appelle \textit{matrice jacobienne} de $f$ en $a$ la matrice de l'application linéaire $f^\prime(a)$ dans les bases canoniques de $\R^2$ :
-\[\text{Jac} f(a) = \left( \partial_{x_j} f_i(a) \right)_{1 \leq i,j \leq 2}= \begin{pmatrix} \partial_{x_1} f_1(a) &\partial_{x_2} f_1(a) \\ \partial_{x_1} f_2(a) &\partial_{x_2} f_2(a).
-\end{pmatrix}\]
+\begin{definition}	Soit $f \colon \R^n \to \R^m$ une application différentiable en $a$. 
+  On appelle \textit{matrice jacobienne} de $f$ en $a$ la matrice de l'application linéaire $f^\prime(a)$ 
+  dans des bases de $\R^n, \R^p$ :
+\[\text{Jac} f(a) = \left( \partial_{x_j} f_i(a) \right)_{i=1\dots  m, j=1 \dots n}
+\]
 \end{definition}
 
 La proposition suivante est souvent utilisée pour prouver la différentiabilité. 
 
-\begin{fprop} Si les dérivées partielles $\partial_{x_i} f(x)$ existent en tout point $x=(x_1,x_2) \in U$ et
-   si les applications $\partial_{x_i}f \colon U \to \mathcal{L}(\R, \R^2) \simeq \R^2$ sont continues au point $a$,
-    alors $f$ est différentiable au point $a$.
-\end{fprop}
-
-\begin{fprop}
-Soit $f \colon U \to \R^2$. Si les dérivées partielles de $f$ existent et sont continues, alors $f$ est de classe $C^1(U)$.
+\begin{fprop} Soit $f \colon R^\n \to \R^m$ et $x_0 \in \R^n.$ Si les dérivées partielles $\partial_{x_i} f(x)$ existent en tout point
+  d'un voisinage ouvert $U$ de $x_0$ et sont continues au point $x_0$,
+    alors $f$ est différentiable en $x_0.$ De plus, si les dérivées partielles sont continues dans $U$, alors $f \in C^1(U).$
 \end{fprop}
 
 
-Toutes ces notions et notations s'étendent immédiatement aux fonctions $f \colon U \subset \R^n \to \R^m$. 
+
 % Pour plus de détails, la définition des dérivées secondes et successives et le théorème des fonctions implicites, 
 % le lecteur est prié de se reporter à \cite{cartan1977} par exemple. 
 
@@ -504,7 +561,7 @@ quelconque (cf. Figure~\ref{fig:nonholo}).
 
 \begin{rem}
 Certains auteurs utilisent le mot \textit{analytic} (que l'on peut traduire en français par "analytique") pour désigner une fonction holomorphe. 
-Cette terminologie deviendra sera justifiée plus loin dans le cours.
+Cette terminologie sera justifiée plus loin dans le cours.
 \end{rem}
 
 \subsection{Conditions de Cauchy-Riemann}
