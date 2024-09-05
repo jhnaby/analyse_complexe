@@ -441,9 +441,6 @@ Autrement dit :
 \[f^\prime (a) = \sum_{i=1}^n \partial_{x_i}f(a) e^\ast_i .\]
 où $(e_1^\ast,\dots, e_n^\ast)$ est la base duale de la base $(e_1,\dots,e_n).$
 \end{prop}
-
-Il importe de noter que $f^\prime_{x_1} (a)$ et $f^\prime_{x_2} (a)$ appartiennent à $\mathcal{L}(\R, \R^2)$. Or, en raison de l'isomorphisme canonique entre $\mathcal{L}(\R, \R^2)$ et $\R^2$ \footnote{L'isomorphisme consiste à associer à un vecteur $v \in \R^2$, l'application linéaire $\lambda \mapsto \lambda v$ de $\R$ dans $\R^2$.}, ces différentielles s'identifient à un vecteur de $\R^2$. Plus précisément, la fonction $f$ peut s'écrire comme le couple $f=(f_1,f_2)$ où les $f_i$ sont des fonctions de $U$ dans $\R$. Dans ce cas, les dérivées partielles s'identifient à des nombres réels qui ne sont autres que des dérivées classiques de fonctions réelles. On définit donc en chaque point $a \in U$ et pour $i=1,2$, un vecteur $(\partial_{x_1} f_i (a),\partial_{x_2} f_i (a)) \in \R^2$, appelé le gradient de $f_i$ en $a$ et noté $\nabla f(a)$.   
-
 \begin{definition}	Soit $f \colon \R^n \to \R^m$ une application différentiable en $a$. 
   On appelle \textit{matrice jacobienne} de $f$ en $a$ la matrice de l'application linéaire $f^\prime(a)$ 
   dans des bases de $\R^n, \R^p$ :
@@ -453,11 +450,32 @@ Il importe de noter que $f^\prime_{x_1} (a)$ et $f^\prime_{x_2} (a)$ appartienne
 
 La proposition suivante est souvent utilisée pour prouver la différentiabilité. 
 
-\begin{fprop} Soit $f \colon R^\n \to \R^m$ et $x_0 \in \R^n.$ Si les dérivées partielles $\partial_{x_i} f(x)$ existent en tout point
+\begin{fprop} Soit $f \colon R^n \to \R^m$ et $x_0 \in \R^n.$ Si les dérivées partielles $\partial_{x_i} f(x)$ existent en tout point
   d'un voisinage ouvert $U$ de $x_0$ et sont continues au point $x_0$,
     alors $f$ est différentiable en $x_0.$ De plus, si les dérivées partielles sont continues dans $U$, alors $f \in C^1(U).$
 \end{fprop}
-
+\begin{proof}
+  Soit $h = \sum_{i=1}^n h_i e_i.$
+Pour $h_n$ assez petit, on a:
+\begin{align}
+  f\left( x_0 + h \right) & = f\left( x_0 + \sum_{i=1}^{n-1} h_i e_i \right) + 
+  \partial_{x_n}f\left( x_0 + \sum_{i=1}^{n-1} h_i e_i \right)h_n + o\left( |h_n| \right) \\
+  & = f\left( x_0 + \sum_{i=1}^{n-1} h_i e_i \right) + 
+  \partial_{x_n}f(x_0)h_n+ \\
+  &  \left(\partial_{x_n}f\left( x_0 + \sum_{i=1}^{n-1} h_i e_i \right) - \partial_{x_n}f(x_0) \right)h_n + o\left( |h_n| \right) 
+\end{align}
+Pour tout $\epsilon > 0$, il existe par hypothèse de continuité de $\partial_{x_n}f$ en $x_0$ un $\eta > 0$ tel que:
+\begin{equation}
+  \|h\| < \eta \Rightarrow \left \| \partial_{x_n}f\left( x_0 + \sum_{i=1}^{n-1} h_i e_i \right) - \partial_{x_n}f(x_0) \right \| < \epsilon
+\end{equation}
+On a donc:
+\begin{equation}
+   f\left( x_0 + h \right)  = f\left( x_0 + \sum_{i=1}^{n-1} h_i e_i \right) + 
+  \partial_{x_n}f\left( x_0 \right)h_n + o\left( \|h\| \right)
+\end{equation}
+Une récurrence immédiate montre que $f$ est différentiable en $x_0.$ La seconde partie de la proposition se déduit directement du fait
+que $f^\prime(x) = \sum_{i=1}^n \partial_{x_i}f(x) e_i^\star.$
+\end{proof}
 
 
 % Pour plus de détails, la définition des dérivées secondes et successives et le théorème des fonctions implicites, 
@@ -476,6 +494,9 @@ Une définition équivalente est :
 Une fonction complexe $f$ est dite \textbf{holomorphe} en $z_0$ si il existe $a \in \C$ tel que :
 \[f(z)=f(z_0) + a(z-z_0) + o(\|z-z_0\|_E),\] pour $z \in V$ voisinage ouvert de $z_0$.
 \end{fdefn}
+\begin{rem}
+  L'holomorphie n'est rien d'autre que la différentiabilité lorsque $\C$ est muni de sa structure de $\C$-espace vectoriel.
+\end{rem}
 
 
 
