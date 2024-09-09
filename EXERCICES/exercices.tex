@@ -1,0 +1,31 @@
+\documentclass[a4paper, 12pt]{amsart}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{coursebook}
+\fthmstyle{plain}
+\newfancythm{fthm}{Théorème}
+\fthmstyle{defn}
+\newfancythm{fdefn}{Définition}
+\fthmstyle{ex}
+\newfancythm{fex}{Exercice}
+%\DeclareMathOperator*{\ln}{ln}
+\newcommand{\pd}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows, shapes}
+\usetikzlibrary[patterns]
+\usetikzlibrary{calc,fadings,decorations.pathreplacing, bending} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{positioning}
+\usetikzlibrary{intersections}
+\usetikzlibrary{hobby}
+
+\title{Exercices - thème résidus et transformée de Laplace}
+\setcounter{section}{5}
+\graphicspath{{../images}}
+\begin{document}
+\maketitle
+\input{ex6.tex}
+\end{document}

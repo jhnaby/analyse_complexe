@@ -1,0 +1,72 @@
+\begin{fex}
+ Soit $\Omega$ un domaine non vide de $\mathbb{C}$ et soit $f$ application
+holomorphe sur $\Omega$. Montrer que les conditions suivantes sont
+équivalentes~:
+\renewcommand{\theenumi}{\alph{enumi}}
+\begin{enumerate}
+\item $f$ est constante sur $\Omega$.
+\item $\Re(f)$ est constante sur $\Omega$.
+\item $\Im(f)$ est constante sur $\Omega$.
+\item $|f|$ est constante sur $\Omega$.
+\end{enumerate}
+\end{fex}
+On séparera partie réelle et partie imaginaire de $f$ en posant $f=P+iQ$
+Il est clair que (a) implique les autres conditions. Si on suppose (b), par
+application des conditions de Cauchy et en utilisant que $P$ est constant:
+\[
+ \pd{P}{x} = \pd{Q}{y} = 0 , \pd{P}{y}=-\pd{Q}{x} = 0
+\]
+$\Omega$ étant connexe, on en déduit $Q$ constante. Il s'agit en fait d'une
+équivalence $(b) \Leftrightarrow (c)$, le même raisonnement s'appliquant à $Q$.
+On montre donc en sus que $|f|^2=P^2+Q^2$ est aussi une constante.
+Finalement, si l'on suppose $P^2+Q^2$ constant, les dérivées partielles de
+cette application par rapport à $x,y$ donnent;
+\[
+ P\pd{P}{x}+Q\pd{Q}{x}= 0,\,  P\pd{P}{y}+Q\pd{Q}{y}= 0
+\]
+En utilisant les conditions de Cauchy:
+\[
+ P\pd{P}{x}-Q\pd{P}{y}= 0,\,  P\pd{P}{y}+Q\pd{P}{x}= 0
+\]
+Il s'agit d'un système linéaire homogène de déterminant $P^2+Q^2=|f|^2$. Si
+cette quantité est nulle, alors $f$ est nulle et (a) est vérifiée. Sinon:
+\[
+ \pd{P}{x}=\pd{P}{y}=0
+\]
+prouvant que $P$ est une constante et donc aussi $Q$ car $(b) \Leftrightarrow
+(c)$, soit $f$ constante.
+
+\begin{fex}
+Soit $\Omega$ un ouvert de $\C$ ne contenant pas $0.$ Soit $f=P + i Q \colon \Omega \to \C$ une application $\R$ dérivable. Montrer, en posant $z=re^{i\theta}$ pour $z \in \Omega$, que les conditions de Cauchy en un point $z_0 = r_0 e^{i \theta_0}$ sont équivalentes à:
+\[
+\begin{cases}
+    \frac{\partial P}{\partial r}\vert_{r_0,\theta_0} = \frac{1}{r}\frac{\partial Q}{\partial \theta}\vert_{r_0,\theta_0} \\
+    \frac{\partial P}{\partial \theta}\vert_{r_0,\theta_0} =- r\frac{\partial Q}{\partial r}\vert_{r_0,\theta_0}
+\end{cases}
+\]
+\end{fex}
+Il s'agit d'une application de la dérivation en chaîne. En posant $z = x + i y$, $f = P + i Q$ 
+et en supposant vérifiées les conditions de Cauchy en coordonnées cartésiennes:
+\begin{equation}
+\begin{split}
+    & \frac{\partial P}{\partial r} = \frac{\partial P}{\partial x}\frac{\partial x}{\partial r} +\frac{\partial P}{\partial y}\frac{\partial y}{\partial r}
+    = \frac{\partial Q}{\partial y} \cos \theta -\frac{\partial Q}{\partial x} \sin \theta\\
+    & \frac{\partial Q}{\partial \theta} = \frac{\partial Q}{\partial x}\frac{\partial x}{\partial \theta} + \frac{\partial Q}{\partial y}\frac{\partial y}{\partial \theta} = -\frac{\partial Q}{\partial x} r \sin\theta + \frac{\partial Q}{\partial y} r \cos \theta
+\end{split}
+\end{equation}
+Par identification:
+\[
+\frac{\partial P}{\partial r} = \frac{1}{r}\frac{\partial Q}{\partial \theta}
+\]
+De même:
+\begin{equation}
+\begin{split}
+    & \frac{\partial P}{\partial \theta} = \frac{\partial P}{\partial x}\frac{\partial x}{\partial \theta} +\frac{\partial P}{\partial y}\frac{\partial y}{\partial \theta}
+    = - \frac{\partial Q}{\partial y} r \sin \theta -\frac{\partial Q}{\partial x} r \cos \theta\\
+    & \frac{\partial Q}{\partial r} = \frac{\partial Q}{\partial x}\frac{\partial x}{\partial r} + \frac{\partial Q}{\partial y}\frac{\partial y}{\partial r} = \frac{\partial Q}{\partial x}  \cos \theta + \frac{\partial Q}{\partial y} \sin \theta
+\end{split}
+\end{equation}
+d'où:
+\[
+\frac{\partial P}{\partial \theta} = -r \frac{\partial Q}{\partial r}
+\]

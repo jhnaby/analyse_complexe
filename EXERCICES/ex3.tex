@@ -1,0 +1,94 @@
+\begin{fex}
+    Soit $\Omega$ un ouvert de $\C$ contenant l'origine et $f \colon \Omega \to \C$ une application développable en
+    série entière au voisinage de $0$, de rayon de convergence $r > 0$. On dira que $z_0 \in \Omega$ est un point singulier de $f$ si $f$ n'est développable en série entière dans aucune boule ouverte de centre $z_0$ et de rayon non nul.
+    \begin{itemize}
+        \item Montrer qu'il ne peut exister aucun point singulier dans la boule ouverte $B(0,R).$
+        \item Montrer qu'il existe au moins un point singulier sur $\partial B(0,R) = \Bar{B}(0,R)-B(0,R).$
+    \end{itemize}
+    On admettra la propriété suivante, qui est démontrée dans le chapitre sur les séries de Laurent: Une application holomorphe dans un domaine $\Omega$ est développable en série entière dans tout disque ouvert contenu dans $\Omega.$
+\end{fex}
+Cet exercice montre que le rayon de convergence est égal à la distance au plus proche point singulier. 
+Si $z_0$ appartient à $D(0,R)$, alors il existe $\eta > 0$ tel que $D(z_0,\eta) \subset D(0,R).$ Soit $z \in D(z_0,\eta)$, alors:
+\begin{equation}
+\label{eq:sum_z_z0}
+\begin{split}
+f(z) & = \sum_{n\in \N} a_n z^n = \sum_{n \in \N} a_n \left(
+z-z_0 + z_0
+\right)^n \\
+& = \sum_{n\in \N} a_n z^n = \sum_{n \in \N} a_n \sum_{k=0}^n
+\frac{n!}{k!(n-k)!} \left( z-z_0 \right)^k z_0^{n-k}
+\end{split}
+\end{equation}
+Cette série est absolument convergente car:
+\[
+\lvert z-z_0 \rvert ^k \lvert z_0 \rvert^{n-k} \leq \eta^k \lvert z_0 \rvert^{n-k}
+\]
+d'où:
+\[
+\begin{split}
+\sum_{n \in \N} \lvert  a_n \rvert \sum_{k=0}^n
+\frac{n!}{k!(n-k)!} \lvert z-z_0 \rvert^k \lvert z_0\rvert ^{n-k} 
+& \leq \sum_{n \in \N} \lvert  a_n \rvert \sum_{k=0}^n
+\frac{n!}{k!(n-k)!} \eta^k \lvert z_0 \rvert^{n-k}\\
+& \leq \sum_{n \in \N} \lvert  a_n \rvert \left( \eta + \lvert z_0 \rvert \right)^n < +\infty
+\end{split}
+\]
+Il est donc possible d'intervertir les sommes dans \ref{eq:sum_z_z0} ce qui donne:
+\begin{equation}
+\begin{split}
+ f(z) & = \sum_{n\in \N} a_n z^n = \sum_{n \in \N} \left(z-z_0\right)^n \sum_{k \geq n} a_k \frac{k!}{n! (k-n)!}z_0^{k-n} \\ 
+  & = \sum_{n \in \N} \frac{f^{(n)}(z_0)}{n!} \left(z-z_0\right)^n
+  \end{split}
+\end{equation}
+On a donc démontré la proposition suivante: en tout point $z_0$ du disque ouvert de convergence, l'application $f$ est égale à son développement en série de Taylor dans un disque $D(z_0,\eta).$
+
+Pour la seconde question, supposons qu'il n'existe pas de point singulier sur le cercle $\mathcal{C}(0,r)=\partial B(0,r).$ Il est alors possible de recouvrir $\mathcal{C}(0,r)$ par des boules ouvertes non vides sur lesquelles $f$ est développable en série entière:
+\[
+\mathcal{C}(0,r) \subset \cup_{z \in \mathcal{C}(0,r)} B(z,r_z), \, r_z > 0
+\]
+Comme $\mathcal{C}(0,r)$ est compact, il existe un nombre fini de telles boules vérifiant:
+\[
+\mathcal{C}(0,r) \subset \cup_{i=1}^n B(z_i, r_i), z_i \in \mathcal{C}(0,r), \, r_i > 0, \, i=1\dots n.
+\]
+On en déduit que l'application $f$ se prolonge en une application analytique dans un disque ouvert $B\left(0,r+\eta\right),\, \eta > 0$ et admettra donc un développement en $0$ de rayon de convergence strictement plus grand que $r$, ce qui est une contradiction.
+\begin{fex}
+Montrer que le développement en serie entière de 
+\[\frac{e^z}{1+z}\]
+a pour terme général:
+\[a_n=(-1)^n \left[\frac{1}{2!} - \frac{1}{3!} + \cdots + \frac{(-1)^n}{n!}\right], \quad n \geq 2.\]
+
+Quel est le rayon de convergence de la série ?
+\end{fex}
+On utilise la formule du produit de Cauchy qui donne directement le terme général $a_n.$
+
+Le rayon de convergence est $1$ par application du critère de d'Alembert.
+\begin{fex}
+ Soit la série entière:
+\[
+f \colon z \mapsto \sum_{n >0}(-1)^{n-1}\frac{(z-1)^n}{n}
+\]
+\begin{enumerate}
+  \item Déterminer son rayon de convergence;
+  \item Montrer que pour tout réel $x \in ]0,2[$, $f(x)=\log(x)$;
+  \item En déduire que $f$ est l'unique application analytique prolongeant le
+  logarithme réel sur le disque ouvert $B(1,1)$;
+  \item Vérifier que sur $B(1,1)$, on a $\exp \circ f = Id$.
+\end{enumerate}
+\end{fex}
+\begin{enumerate}
+ \item On utilise le critère de d'Alembert. Le rapport de deux termes
+consécutifs est $n/(n+1)$, de limite 1 à l'infini. Le rayon de convergence est
+donc 1.
+\item Résultat classique de classes préparatoires. On peut dériver terme à
+terme la série dans son disque ouvert de convergence, qui donne la série:
+\[
+\sum_{n >0}(-1)^{n} (z-1)^n = \frac{1}{1+(z-1)}
+\]
+La valeur particulière $f(1)=0$ permet alors de conclure.
+\item $f$ coïncide avec $\log$ sur une partie possèdant un point d'accumulation
+(en fait, tout le segment réel $]0,2[$). Par le principe du prolongement
+analytique, elle est unique.
+\item Toujours sur le segment $]0,2[$, $\exp \circ f = \exp \circ \log = Id$.
+Par prolongement analytique de l'application $\exp \circ f$, cette égalité est
+vraie sur $B(1,1)$.
+\end{enumerate}

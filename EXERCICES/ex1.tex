@@ -1,0 +1,34 @@
+\begin{fex}
+    Soit $f \colon \R^n \to \R$ une application continue vérifiant la propriété suivante:
+    \[
+    \forall M > 0, \exists R_M > 0, \forall x \in \R^n, \| x \| \geq R_M \Rightarrow f(x) \geq M. 
+    \]
+    \begin{itemize}
+        \item Montrer qu'il existe un réel $R > 0$ tel que:
+        \[\inf_{x\in \R^n} f(x) = \inf_{x\in \R^n, \|x\| \leq R} f(x).\]
+        \item Par compacité de la boule fermée $\overline{B}(0,R)$, en déduire qu'il existe $x_0 \in \R^n$ tel que:
+        \[
+        f(x_0) = \inf_{x\in \R^n} f(x).
+        \]
+    \end{itemize}
+\end{fex}
+\begin{itemize}
+    \item  Par hypothèse, il existe $R> 0$ tel que $\forall x \in \R^n, \| x \| \geq R \Rightarrow f(x) \geq f(0).$ On en déduit que:
+    \begin{equation}
+        \inf_{x\in \R^n} f(x) = \inf_{x\in \R^n, \|x\| \leq R} f(x).
+    \end{equation}
+    \item Une application continue sur un compact atteint ses bornes, il existe donc $x_0 \in \overline{B}(0,R)$ tel que:
+    \begin{equation}
+        f(x_0) = \inf_{x\in \R^n} f(x).
+    \end{equation}
+\end{itemize}
+
+
+\begin{fex}
+   Montrer que $\C$ et $\R$ ne sont pas homéomorphes. 
+    
+    \textbf{Indication:} Montrer que si $\phi \colon \C \to \R$ est un homéomorphisme, alors $\Phi\left(\C-\{0\}\right)$ n'est pas connexe.    
+\end{fex}
+Si $\phi$ est un homéomorphisme, il n'existe pas de complexe $z$ tel que $\phi(z)=\phi(0)$ et donc
+$\phi\left(\C - \{0\}\right)=\R-\{\phi(0)\}.$ Ce sous-ensemble de $\R$ est un ouvert qui n'est pas
+connexe par arc, alors que $\C - \{0\}$ l'est, ce qui est contradictoire.
